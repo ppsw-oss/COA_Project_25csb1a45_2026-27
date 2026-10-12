@@ -1,0 +1,1562 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project source="4.1.0" version="1.0">
+  This file is intended to be loaded by Logisim-evolution v4.1.0(https://github.com/logisim-evolution/).
+  <lib desc="#Wiring" name="0"/>
+  <lib desc="#Gates" name="1"/>
+  <lib desc="#Plexers" name="2"/>
+  <lib desc="#Arithmetic" name="3"/>
+  <lib desc="#Memory" name="4"/>
+  <lib desc="#I/O" name="5"/>
+  <lib desc="#TTL" name="6"/>
+  <lib desc="#TCL" name="7"/>
+  <lib desc="#Base" name="8"/>
+  <lib desc="#BFH-Praktika" name="9"/>
+  <lib desc="#Input/Output-Extra" name="10"/>
+  <lib desc="#Soc" name="11"/>
+  <main name="main"/>
+  <options>
+    <a name="gateUndefined" val="ignore"/>
+    <a name="simlimit" val="1000"/>
+    <a name="simrand" val="0"/>
+  </options>
+  <mappings>
+    <tool lib="8" map="Button2" name="Poke Tool"/>
+    <tool lib="8" map="Button3" name="Menu Tool"/>
+    <tool lib="8" map="Ctrl Button1" name="Menu Tool"/>
+  </mappings>
+  <toolbar>
+    <tool lib="8" name="Poke Tool"/>
+    <tool lib="8" name="Edit Tool"/>
+    <tool lib="8" name="Wiring Tool"/>
+    <tool lib="8" name="Text Tool"/>
+    <sep/>
+    <tool lib="0" name="Pin"/>
+    <tool lib="0" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </tool>
+    <tool lib="0" name="Tunnel"/>
+    <tool lib="0" name="Constant"/>
+    <sep/>
+    <tool lib="1" name="NOT Gate"/>
+    <tool lib="1" name="AND Gate"/>
+    <tool lib="1" name="OR Gate"/>
+    <tool lib="1" name="XOR Gate"/>
+    <tool lib="1" name="NAND Gate"/>
+    <tool lib="1" name="NOR Gate"/>
+    <sep/>
+    <tool lib="2" name="Multiplexer"/>
+    <tool lib="3" name="Adder"/>
+    <tool lib="3" name="Comparator"/>
+    <tool lib="4" name="Register"/>
+    <tool lib="4" name="Counter"/>
+  </toolbar>
+  <circuit name="main">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="main"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="4.0"/>
+    <comp lib="8" loc="(280,100)" name="Text"><a name="text" val="INPUTS"/><a name="font" val="SansSerif bold 14"/></comp>
+    <comp lib="8" loc="(280,120)" name="Text"><a name="text" val="Set switches, pulse START. RESET = async clear."/><a name="font" val="SansSerif plain 11"/></comp>
+    <comp lib="8" loc="(760,100)" name="Text"><a name="text" val="DECODERS / COMPARATORS"/><a name="font" val="SansSerif bold 14"/></comp>
+    <comp lib="8" loc="(760,120)" name="Text"><a name="text" val="EQ against constants decodes STATE; GT/LT test thresholds."/><a name="font" val="SansSerif plain 11"/></comp>
+    <comp lib="8" loc="(1240,100)" name="Text"><a name="text" val="PARAMETER LOOK-UP (MUX)"/><a name="font" val="SansSerif bold 14"/></comp>
+    <comp lib="8" loc="(1240,120)" name="Text"><a name="text" val="fabric/load/water -&gt; constants via 2:1 mux chains."/><a name="font" val="SansSerif plain 11"/></comp>
+    <comp lib="8" loc="(1720,100)" name="Text"><a name="text" val="CYCLE-TIME ARITHMETIC"/><a name="font" val="SansSerif bold 14"/></comp>
+    <comp lib="8" loc="(1720,120)" name="Text"><a name="text" val="wash = base + 2*load + 4*soil; rinse = 2*water+2; spin = base+load."/><a name="font" val="SansSerif plain 11"/></comp>
+    <comp lib="8" loc="(2200,100)" name="Text"><a name="text" val="CONTROL EVENTS (MUX LOGIC)"/><a name="font" val="SansSerif bold 14"/></comp>
+    <comp lib="8" loc="(2200,120)" name="Text"><a name="text" val="go_wash = IDLE&amp;START; stage ends = state&amp;timer==0."/><a name="font" val="SansSerif plain 11"/></comp>
+    <comp lib="8" loc="(2680,100)" name="Text"><a name="text" val="CONFIG LATCH (frozen at START)"/><a name="font" val="SansSerif bold 14"/></comp>
+    <comp lib="8" loc="(2680,120)" name="Text"><a name="text" val="Registers load every tick in IDLE, hold while running (WE=IDLE)."/><a name="font" val="SansSerif plain 11"/></comp>
+    <comp lib="8" loc="(3160,100)" name="Text"><a name="text" val="UNBALANCE GUARD + FAULT"/><a name="font" val="SansSerif bold 14"/></comp>
+    <comp lib="8" loc="(3160,120)" name="Text"><a name="text" val="Pre-spin + in-spin check; max 2 REBAL then FAULT."/><a name="font" val="SansSerif plain 11"/></comp>
+    <comp lib="8" loc="(3640,100)" name="Text"><a name="text" val="NEXT-STATE / NEXT-TIMER"/><a name="font" val="SansSerif bold 14"/></comp>
+    <comp lib="8" loc="(3640,120)" name="Text"><a name="text" val="Priority chain: later mux wins (abort &gt; rebal &gt; end ...)."/><a name="font" val="SansSerif plain 11"/></comp>
+    <comp lib="8" loc="(4120,100)" name="Text"><a name="text" val="RESOURCE METER + BASELINE"/><a name="font" val="SansSerif bold 14"/></comp>
+    <comp lib="8" loc="(4120,120)" name="Text"><a name="text" val="ticks, energy (3/1/2/1 per tick), water; compare to 49/112/16."/><a name="font" val="SansSerif plain 11"/></comp>
+    <comp lib="8" loc="(4600,100)" name="Text"><a name="text" val="STATE REGISTERS"/><a name="font" val="SansSerif bold 14"/></comp>
+    <comp lib="8" loc="(4600,120)" name="Text"><a name="text" val="Async RESET clears all. WE tied 1 (latch regs use WE=IDLE)."/><a name="font" val="SansSerif plain 11"/></comp>
+    <comp lib="8" loc="(5080,100)" name="Text"><a name="text" val="OUTPUTS"/><a name="font" val="SansSerif bold 14"/></comp>
+    <comp lib="8" loc="(5080,120)" name="Text"><a name="text" val="SAVED outputs valid at END only."/><a name="font" val="SansSerif plain 11"/></comp>
+    <comp lib="8" loc="(100,20)" name="Text"><a name="text" val="Smart Washing Machine Control and Cycle Management System  |  Palak (25CSB1A45)  |  COA EC1263  |  Logisim Evolution 4.1.0  |  FIXED/audited build"/><a name="font" val="SansSerif bold 16"/></comp>
+    <comp lib="8" loc="(100,50)" name="Text"><a name="text" val="Features: closed-loop turbidity feedback (ADAPT_EN) + unbalance guard with bounded REBAL retries and FAULT (BAL_EN) + resource meter vs fixed-cycle baseline.  Enable ticks: Ctrl+K."/><a name="font" val="SansSerif plain 12"/></comp>
+    <comp lib="8" loc="(100,70)" name="Text"><a name="text" val="Ablation: FIXED_CYCLE=1 -&gt; B0 baseline | FIXED=0,ADAPT=0,BAL=0 -&gt; B1 | +ADAPT_EN/+BAL_EN -&gt; B2.  Fabric 0=cotton 1=synthetic 2=delicate 3=heavy.  States: 0 IDLE 1 WASH 2 RINSE 3 SPIN 4 END 5 REBAL (6,7 recover to IDLE)."/><a name="font" val="SansSerif plain 12"/></comp>
+    <comp lib="0" loc="(400,140)" name="Clock"><a name="label" val="CLK"/></comp>
+    <wire from="(400,140)" to="(430,140)"/>
+    <comp lib="0" loc="(430,140)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="clk"/></comp>
+    <comp lib="0" loc="(400,280)" name="Pin"><a name="label" val="FABRIC"/><a name="width" val="2"/></comp>
+    <wire from="(400,280)" to="(430,280)"/>
+    <comp lib="0" loc="(430,280)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="2"/><a name="label" val="fabric"/></comp>
+    <comp lib="0" loc="(400,420)" name="Pin"><a name="label" val="LOAD"/><a name="width" val="2"/></comp>
+    <wire from="(400,420)" to="(430,420)"/>
+    <comp lib="0" loc="(430,420)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="2"/><a name="label" val="load"/></comp>
+    <comp lib="0" loc="(400,560)" name="Pin"><a name="label" val="WATER"/><a name="width" val="2"/></comp>
+    <wire from="(400,560)" to="(430,560)"/>
+    <comp lib="0" loc="(430,560)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="2"/><a name="label" val="water"/></comp>
+    <comp lib="0" loc="(400,700)" name="Pin"><a name="label" val="SOIL"/><a name="width" val="1"/></comp>
+    <wire from="(400,700)" to="(430,700)"/>
+    <comp lib="0" loc="(430,700)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="soil"/></comp>
+    <comp lib="0" loc="(400,840)" name="Pin"><a name="label" val="TURB"/><a name="width" val="2"/></comp>
+    <wire from="(400,840)" to="(430,840)"/>
+    <comp lib="0" loc="(430,840)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="2"/><a name="label" val="turb"/></comp>
+    <comp lib="0" loc="(400,980)" name="Pin"><a name="label" val="BAL"/><a name="width" val="2"/></comp>
+    <wire from="(400,980)" to="(430,980)"/>
+    <comp lib="0" loc="(430,980)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="2"/><a name="label" val="bal"/></comp>
+    <comp lib="0" loc="(400,1120)" name="Pin"><a name="label" val="FIXED_CYCLE"/><a name="width" val="1"/></comp>
+    <wire from="(400,1120)" to="(430,1120)"/>
+    <comp lib="0" loc="(430,1120)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="fixed"/></comp>
+    <comp lib="0" loc="(400,1260)" name="Pin"><a name="label" val="ADAPT_EN"/><a name="width" val="1"/></comp>
+    <wire from="(400,1260)" to="(430,1260)"/>
+    <comp lib="0" loc="(430,1260)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="adapt_en"/></comp>
+    <comp lib="0" loc="(400,1400)" name="Pin"><a name="label" val="BAL_EN"/><a name="width" val="1"/></comp>
+    <wire from="(400,1400)" to="(430,1400)"/>
+    <comp lib="0" loc="(430,1400)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="bal_en"/></comp>
+    <comp lib="0" loc="(400,1540)" name="Pin"><a name="label" val="START"/><a name="width" val="1"/></comp>
+    <wire from="(400,1540)" to="(430,1540)"/>
+    <comp lib="0" loc="(430,1540)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="start"/></comp>
+    <comp lib="0" loc="(400,1680)" name="Pin"><a name="label" val="RESET"/><a name="width" val="1"/></comp>
+    <wire from="(400,1680)" to="(430,1680)"/>
+    <comp lib="0" loc="(430,1680)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="reset"/></comp>
+    <comp lib="3" loc="(880,140)" name="Comparator"><a name="width" val="2"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,130)" to="(810,130)"/>
+    <comp lib="0" loc="(810,130)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="fabric"/></comp>
+    <wire from="(840,150)" to="(810,150)"/>
+    <comp lib="0" loc="(810,150)" name="Constant"><a name="width" val="2"/><a name="value" val="0x1"/></comp>
+    <wire from="(880,140)" to="(950,140)"/>
+    <comp lib="0" loc="(950,140)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="fabric_is1"/></comp>
+    <comp lib="3" loc="(880,280)" name="Comparator"><a name="width" val="2"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,270)" to="(810,270)"/>
+    <comp lib="0" loc="(810,270)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="fabric"/></comp>
+    <wire from="(840,290)" to="(810,290)"/>
+    <comp lib="0" loc="(810,290)" name="Constant"><a name="width" val="2"/><a name="value" val="0x2"/></comp>
+    <wire from="(880,280)" to="(950,280)"/>
+    <comp lib="0" loc="(950,280)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="fabric_is2"/></comp>
+    <comp lib="3" loc="(880,420)" name="Comparator"><a name="width" val="2"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,410)" to="(810,410)"/>
+    <comp lib="0" loc="(810,410)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="fabric"/></comp>
+    <wire from="(840,430)" to="(810,430)"/>
+    <comp lib="0" loc="(810,430)" name="Constant"><a name="width" val="2"/><a name="value" val="0x3"/></comp>
+    <wire from="(880,420)" to="(950,420)"/>
+    <comp lib="0" loc="(950,420)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="fabric_is3"/></comp>
+    <comp lib="3" loc="(880,560)" name="Comparator"><a name="width" val="2"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,550)" to="(810,550)"/>
+    <comp lib="0" loc="(810,550)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="load"/></comp>
+    <wire from="(840,570)" to="(810,570)"/>
+    <comp lib="0" loc="(810,570)" name="Constant"><a name="width" val="2"/><a name="value" val="0x1"/></comp>
+    <wire from="(880,560)" to="(950,560)"/>
+    <comp lib="0" loc="(950,560)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="load_is1"/></comp>
+    <comp lib="3" loc="(880,700)" name="Comparator"><a name="width" val="2"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,690)" to="(810,690)"/>
+    <comp lib="0" loc="(810,690)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="load"/></comp>
+    <wire from="(840,710)" to="(810,710)"/>
+    <comp lib="0" loc="(810,710)" name="Constant"><a name="width" val="2"/><a name="value" val="0x2"/></comp>
+    <wire from="(880,700)" to="(950,700)"/>
+    <comp lib="0" loc="(950,700)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="load_is2"/></comp>
+    <comp lib="3" loc="(880,840)" name="Comparator"><a name="width" val="2"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,830)" to="(810,830)"/>
+    <comp lib="0" loc="(810,830)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="load"/></comp>
+    <wire from="(840,850)" to="(810,850)"/>
+    <comp lib="0" loc="(810,850)" name="Constant"><a name="width" val="2"/><a name="value" val="0x3"/></comp>
+    <wire from="(880,840)" to="(950,840)"/>
+    <comp lib="0" loc="(950,840)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="load_is3"/></comp>
+    <comp lib="3" loc="(880,980)" name="Comparator"><a name="width" val="2"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,970)" to="(810,970)"/>
+    <comp lib="0" loc="(810,970)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="water"/></comp>
+    <wire from="(840,990)" to="(810,990)"/>
+    <comp lib="0" loc="(810,990)" name="Constant"><a name="width" val="2"/><a name="value" val="0x1"/></comp>
+    <wire from="(880,980)" to="(950,980)"/>
+    <comp lib="0" loc="(950,980)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="water_is1"/></comp>
+    <comp lib="3" loc="(880,1120)" name="Comparator"><a name="width" val="2"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,1110)" to="(810,1110)"/>
+    <comp lib="0" loc="(810,1110)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="water"/></comp>
+    <wire from="(840,1130)" to="(810,1130)"/>
+    <comp lib="0" loc="(810,1130)" name="Constant"><a name="width" val="2"/><a name="value" val="0x2"/></comp>
+    <wire from="(880,1120)" to="(950,1120)"/>
+    <comp lib="0" loc="(950,1120)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="water_is2"/></comp>
+    <comp lib="3" loc="(880,1260)" name="Comparator"><a name="width" val="2"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,1250)" to="(810,1250)"/>
+    <comp lib="0" loc="(810,1250)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="water"/></comp>
+    <wire from="(840,1270)" to="(810,1270)"/>
+    <comp lib="0" loc="(810,1270)" name="Constant"><a name="width" val="2"/><a name="value" val="0x3"/></comp>
+    <wire from="(880,1260)" to="(950,1260)"/>
+    <comp lib="0" loc="(950,1260)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="water_is3"/></comp>
+    <comp lib="3" loc="(880,1400)" name="Comparator"><a name="width" val="3"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,1390)" to="(810,1390)"/>
+    <comp lib="0" loc="(810,1390)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="state"/></comp>
+    <wire from="(840,1410)" to="(810,1410)"/>
+    <comp lib="0" loc="(810,1410)" name="Constant"><a name="width" val="3"/><a name="value" val="0x0"/></comp>
+    <wire from="(880,1400)" to="(950,1400)"/>
+    <comp lib="0" loc="(950,1400)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="s_idle"/></comp>
+    <comp lib="3" loc="(880,1540)" name="Comparator"><a name="width" val="3"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,1530)" to="(810,1530)"/>
+    <comp lib="0" loc="(810,1530)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="state"/></comp>
+    <wire from="(840,1550)" to="(810,1550)"/>
+    <comp lib="0" loc="(810,1550)" name="Constant"><a name="width" val="3"/><a name="value" val="0x1"/></comp>
+    <wire from="(880,1540)" to="(950,1540)"/>
+    <comp lib="0" loc="(950,1540)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="s_wash"/></comp>
+    <comp lib="3" loc="(880,1680)" name="Comparator"><a name="width" val="3"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,1670)" to="(810,1670)"/>
+    <comp lib="0" loc="(810,1670)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="state"/></comp>
+    <wire from="(840,1690)" to="(810,1690)"/>
+    <comp lib="0" loc="(810,1690)" name="Constant"><a name="width" val="3"/><a name="value" val="0x2"/></comp>
+    <wire from="(880,1680)" to="(950,1680)"/>
+    <comp lib="0" loc="(950,1680)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="s_rinse"/></comp>
+    <comp lib="3" loc="(880,1820)" name="Comparator"><a name="width" val="3"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,1810)" to="(810,1810)"/>
+    <comp lib="0" loc="(810,1810)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="state"/></comp>
+    <wire from="(840,1830)" to="(810,1830)"/>
+    <comp lib="0" loc="(810,1830)" name="Constant"><a name="width" val="3"/><a name="value" val="0x3"/></comp>
+    <wire from="(880,1820)" to="(950,1820)"/>
+    <comp lib="0" loc="(950,1820)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="s_spin"/></comp>
+    <comp lib="3" loc="(880,1960)" name="Comparator"><a name="width" val="3"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,1950)" to="(810,1950)"/>
+    <comp lib="0" loc="(810,1950)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="state"/></comp>
+    <wire from="(840,1970)" to="(810,1970)"/>
+    <comp lib="0" loc="(810,1970)" name="Constant"><a name="width" val="3"/><a name="value" val="0x4"/></comp>
+    <wire from="(880,1960)" to="(950,1960)"/>
+    <comp lib="0" loc="(950,1960)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="s_end"/></comp>
+    <comp lib="3" loc="(880,2100)" name="Comparator"><a name="width" val="3"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,2090)" to="(810,2090)"/>
+    <comp lib="0" loc="(810,2090)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="state"/></comp>
+    <wire from="(840,2110)" to="(810,2110)"/>
+    <comp lib="0" loc="(810,2110)" name="Constant"><a name="width" val="3"/><a name="value" val="0x5"/></comp>
+    <wire from="(880,2100)" to="(950,2100)"/>
+    <comp lib="0" loc="(950,2100)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="s_rebal"/></comp>
+    <comp lib="3" loc="(880,2240)" name="Comparator"><a name="width" val="3"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,2230)" to="(810,2230)"/>
+    <comp lib="0" loc="(810,2230)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="state"/></comp>
+    <wire from="(840,2250)" to="(810,2250)"/>
+    <comp lib="0" loc="(810,2250)" name="Constant"><a name="width" val="3"/><a name="value" val="0x5"/></comp>
+    <wire from="(880,2230)" to="(910,2230)"/>
+    <comp lib="0" loc="(910,2230)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="s_inval"/></comp>
+    <comp lib="3" loc="(880,2380)" name="Comparator"><a name="width" val="8"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,2370)" to="(810,2370)"/>
+    <comp lib="0" loc="(810,2370)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="timer"/></comp>
+    <wire from="(840,2390)" to="(810,2390)"/>
+    <comp lib="0" loc="(810,2390)" name="Constant"><a name="width" val="8"/><a name="value" val="0x0"/></comp>
+    <wire from="(880,2370)" to="(910,2370)"/>
+    <comp lib="0" loc="(910,2370)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="tnz"/></comp>
+    <wire from="(880,2380)" to="(950,2380)"/>
+    <comp lib="0" loc="(950,2380)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="tz"/></comp>
+    <comp lib="3" loc="(880,2520)" name="Comparator"><a name="width" val="2"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,2510)" to="(810,2510)"/>
+    <comp lib="0" loc="(810,2510)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="turb"/></comp>
+    <wire from="(840,2530)" to="(810,2530)"/>
+    <comp lib="0" loc="(810,2530)" name="Constant"><a name="width" val="2"/><a name="value" val="0x1"/></comp>
+    <wire from="(880,2510)" to="(910,2510)"/>
+    <comp lib="0" loc="(910,2510)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="turb_hi"/></comp>
+    <comp lib="3" loc="(880,2660)" name="Comparator"><a name="width" val="2"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,2650)" to="(810,2650)"/>
+    <comp lib="0" loc="(810,2650)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="bal"/></comp>
+    <wire from="(840,2670)" to="(810,2670)"/>
+    <comp lib="0" loc="(810,2670)" name="Constant"><a name="width" val="2"/><a name="value" val="0x1"/></comp>
+    <wire from="(880,2650)" to="(910,2650)"/>
+    <comp lib="0" loc="(910,2650)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="bal_hi"/></comp>
+    <comp lib="3" loc="(880,2800)" name="Comparator"><a name="width" val="2"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,2790)" to="(810,2790)"/>
+    <comp lib="0" loc="(810,2790)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="ext"/></comp>
+    <wire from="(840,2810)" to="(810,2810)"/>
+    <comp lib="0" loc="(810,2810)" name="Constant"><a name="width" val="2"/><a name="value" val="0x3"/></comp>
+    <wire from="(880,2810)" to="(990,2810)"/>
+    <comp lib="0" loc="(990,2810)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="ext_lt"/></comp>
+    <comp lib="3" loc="(880,2940)" name="Comparator"><a name="width" val="2"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,2930)" to="(810,2930)"/>
+    <comp lib="0" loc="(810,2930)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="att"/></comp>
+    <wire from="(840,2950)" to="(810,2950)"/>
+    <comp lib="0" loc="(810,2950)" name="Constant"><a name="width" val="2"/><a name="value" val="0x2"/></comp>
+    <wire from="(880,2950)" to="(990,2950)"/>
+    <comp lib="0" loc="(990,2950)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="att_lt"/></comp>
+    <comp lib="3" loc="(880,3080)" name="Comparator"><a name="width" val="8"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,3070)" to="(810,3070)"/>
+    <comp lib="0" loc="(810,3070)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="ticks"/></comp>
+    <wire from="(840,3090)" to="(810,3090)"/>
+    <comp lib="0" loc="(810,3090)" name="Constant"><a name="width" val="8"/><a name="value" val="0x31"/></comp>
+    <wire from="(880,3070)" to="(910,3070)"/>
+    <comp lib="0" loc="(910,3070)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="t_over"/></comp>
+    <comp lib="3" loc="(880,3220)" name="Comparator"><a name="width" val="12"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,3210)" to="(810,3210)"/>
+    <comp lib="0" loc="(810,3210)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="12"/><a name="label" val="energy"/></comp>
+    <wire from="(840,3230)" to="(810,3230)"/>
+    <comp lib="0" loc="(810,3230)" name="Constant"><a name="width" val="12"/><a name="value" val="0x70"/></comp>
+    <wire from="(880,3210)" to="(910,3210)"/>
+    <comp lib="0" loc="(910,3210)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="e_over"/></comp>
+    <comp lib="3" loc="(880,3360)" name="Comparator"><a name="width" val="8"/><a name="mode" val="unsigned"/></comp>
+    <wire from="(840,3350)" to="(810,3350)"/>
+    <comp lib="0" loc="(810,3350)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="water_used"/></comp>
+    <wire from="(840,3370)" to="(810,3370)"/>
+    <comp lib="0" loc="(810,3370)" name="Constant"><a name="width" val="8"/><a name="value" val="0x10"/></comp>
+    <wire from="(880,3350)" to="(910,3350)"/>
+    <comp lib="0" loc="(910,3350)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="w_over"/></comp>
+    <comp lib="2" loc="(1360,140)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1340,150)" to="(1340,190)"/>
+    <comp lib="0" loc="(1340,190)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="fabric_is1"/></comp>
+    <wire from="(1330,130)" to="(1300,130)"/>
+    <comp lib="0" loc="(1300,130)" name="Constant"><a name="width" val="8"/><a name="value" val="0x8"/></comp>
+    <wire from="(1330,150)" to="(1300,150)"/>
+    <comp lib="0" loc="(1300,150)" name="Constant"><a name="width" val="8"/><a name="value" val="0x6"/></comp>
+    <wire from="(1360,140)" to="(1390,140)"/>
+    <comp lib="0" loc="(1390,140)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="wb_a"/></comp>
+    <comp lib="2" loc="(1360,280)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1340,290)" to="(1340,330)"/>
+    <comp lib="0" loc="(1340,330)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="fabric_is2"/></comp>
+    <wire from="(1330,270)" to="(1300,270)"/>
+    <comp lib="0" loc="(1300,270)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="wb_a"/></comp>
+    <wire from="(1330,290)" to="(1300,290)"/>
+    <comp lib="0" loc="(1300,290)" name="Constant"><a name="width" val="8"/><a name="value" val="0x4"/></comp>
+    <wire from="(1360,280)" to="(1390,280)"/>
+    <comp lib="0" loc="(1390,280)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="wb_b"/></comp>
+    <comp lib="2" loc="(1360,420)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1340,430)" to="(1340,470)"/>
+    <comp lib="0" loc="(1340,470)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="fabric_is3"/></comp>
+    <wire from="(1330,410)" to="(1300,410)"/>
+    <comp lib="0" loc="(1300,410)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="wb_b"/></comp>
+    <wire from="(1330,430)" to="(1300,430)"/>
+    <comp lib="0" loc="(1300,430)" name="Constant"><a name="width" val="8"/><a name="value" val="0xc"/></comp>
+    <wire from="(1360,420)" to="(1390,420)"/>
+    <comp lib="0" loc="(1390,420)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="wash_base"/></comp>
+    <comp lib="2" loc="(1360,560)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1340,570)" to="(1340,610)"/>
+    <comp lib="0" loc="(1340,610)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="fabric_is1"/></comp>
+    <wire from="(1330,550)" to="(1300,550)"/>
+    <comp lib="0" loc="(1300,550)" name="Constant"><a name="width" val="8"/><a name="value" val="0x6"/></comp>
+    <wire from="(1330,570)" to="(1300,570)"/>
+    <comp lib="0" loc="(1300,570)" name="Constant"><a name="width" val="8"/><a name="value" val="0x5"/></comp>
+    <wire from="(1360,560)" to="(1390,560)"/>
+    <comp lib="0" loc="(1390,560)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="sb_a"/></comp>
+    <comp lib="2" loc="(1360,700)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1340,710)" to="(1340,750)"/>
+    <comp lib="0" loc="(1340,750)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="fabric_is2"/></comp>
+    <wire from="(1330,690)" to="(1300,690)"/>
+    <comp lib="0" loc="(1300,690)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="sb_a"/></comp>
+    <wire from="(1330,710)" to="(1300,710)"/>
+    <comp lib="0" loc="(1300,710)" name="Constant"><a name="width" val="8"/><a name="value" val="0x2"/></comp>
+    <wire from="(1360,700)" to="(1390,700)"/>
+    <comp lib="0" loc="(1390,700)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="sb_b"/></comp>
+    <comp lib="2" loc="(1360,840)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1340,850)" to="(1340,890)"/>
+    <comp lib="0" loc="(1340,890)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="fabric_is3"/></comp>
+    <wire from="(1330,830)" to="(1300,830)"/>
+    <comp lib="0" loc="(1300,830)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="sb_b"/></comp>
+    <wire from="(1330,850)" to="(1300,850)"/>
+    <comp lib="0" loc="(1300,850)" name="Constant"><a name="width" val="8"/><a name="value" val="0x8"/></comp>
+    <wire from="(1360,840)" to="(1390,840)"/>
+    <comp lib="0" loc="(1390,840)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="spin_base"/></comp>
+    <comp lib="2" loc="(1360,980)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1340,990)" to="(1340,1030)"/>
+    <comp lib="0" loc="(1340,1030)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="load_is1"/></comp>
+    <wire from="(1330,970)" to="(1300,970)"/>
+    <comp lib="0" loc="(1300,970)" name="Constant"><a name="width" val="8"/><a name="value" val="0x1"/></comp>
+    <wire from="(1330,990)" to="(1300,990)"/>
+    <comp lib="0" loc="(1300,990)" name="Constant"><a name="width" val="8"/><a name="value" val="0x2"/></comp>
+    <wire from="(1360,980)" to="(1390,980)"/>
+    <comp lib="0" loc="(1390,980)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="lv_a"/></comp>
+    <comp lib="2" loc="(1360,1120)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1340,1130)" to="(1340,1170)"/>
+    <comp lib="0" loc="(1340,1170)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="load_is2"/></comp>
+    <wire from="(1330,1110)" to="(1300,1110)"/>
+    <comp lib="0" loc="(1300,1110)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="lv_a"/></comp>
+    <wire from="(1330,1130)" to="(1300,1130)"/>
+    <comp lib="0" loc="(1300,1130)" name="Constant"><a name="width" val="8"/><a name="value" val="0x3"/></comp>
+    <wire from="(1360,1120)" to="(1390,1120)"/>
+    <comp lib="0" loc="(1390,1120)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="lv_b"/></comp>
+    <comp lib="2" loc="(1360,1260)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1340,1270)" to="(1340,1310)"/>
+    <comp lib="0" loc="(1340,1310)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="load_is3"/></comp>
+    <wire from="(1330,1250)" to="(1300,1250)"/>
+    <comp lib="0" loc="(1300,1250)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="lv_b"/></comp>
+    <wire from="(1330,1270)" to="(1300,1270)"/>
+    <comp lib="0" loc="(1300,1270)" name="Constant"><a name="width" val="8"/><a name="value" val="0x4"/></comp>
+    <wire from="(1360,1260)" to="(1390,1260)"/>
+    <comp lib="0" loc="(1390,1260)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="ld_v"/></comp>
+    <comp lib="2" loc="(1360,1400)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1340,1410)" to="(1340,1450)"/>
+    <comp lib="0" loc="(1340,1450)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="water_is1"/></comp>
+    <wire from="(1330,1390)" to="(1300,1390)"/>
+    <comp lib="0" loc="(1300,1390)" name="Constant"><a name="width" val="8"/><a name="value" val="0x1"/></comp>
+    <wire from="(1330,1410)" to="(1300,1410)"/>
+    <comp lib="0" loc="(1300,1410)" name="Constant"><a name="width" val="8"/><a name="value" val="0x2"/></comp>
+    <wire from="(1360,1400)" to="(1390,1400)"/>
+    <comp lib="0" loc="(1390,1400)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="wv_a"/></comp>
+    <comp lib="2" loc="(1360,1540)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1340,1550)" to="(1340,1590)"/>
+    <comp lib="0" loc="(1340,1590)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="water_is2"/></comp>
+    <wire from="(1330,1530)" to="(1300,1530)"/>
+    <comp lib="0" loc="(1300,1530)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="wv_a"/></comp>
+    <wire from="(1330,1550)" to="(1300,1550)"/>
+    <comp lib="0" loc="(1300,1550)" name="Constant"><a name="width" val="8"/><a name="value" val="0x3"/></comp>
+    <wire from="(1360,1540)" to="(1390,1540)"/>
+    <comp lib="0" loc="(1390,1540)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="wv_b"/></comp>
+    <comp lib="2" loc="(1360,1680)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1340,1690)" to="(1340,1730)"/>
+    <comp lib="0" loc="(1340,1730)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="water_is3"/></comp>
+    <wire from="(1330,1670)" to="(1300,1670)"/>
+    <comp lib="0" loc="(1300,1670)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="wv_b"/></comp>
+    <wire from="(1330,1690)" to="(1300,1690)"/>
+    <comp lib="0" loc="(1300,1690)" name="Constant"><a name="width" val="8"/><a name="value" val="0x4"/></comp>
+    <wire from="(1360,1680)" to="(1390,1680)"/>
+    <comp lib="0" loc="(1390,1680)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="wl_v"/></comp>
+    <comp lib="2" loc="(1360,1820)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1340,1830)" to="(1340,1870)"/>
+    <comp lib="0" loc="(1340,1870)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="soil"/></comp>
+    <wire from="(1330,1810)" to="(1300,1810)"/>
+    <comp lib="0" loc="(1300,1810)" name="Constant"><a name="width" val="8"/><a name="value" val="0x0"/></comp>
+    <wire from="(1330,1830)" to="(1300,1830)"/>
+    <comp lib="0" loc="(1300,1830)" name="Constant"><a name="width" val="8"/><a name="value" val="0x4"/></comp>
+    <wire from="(1360,1820)" to="(1390,1820)"/>
+    <comp lib="0" loc="(1390,1820)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="soil_add"/></comp>
+    <comp lib="3" loc="(1840,140)" name="Multiplier"><a name="width" val="8"/></comp>
+    <wire from="(1800,130)" to="(1770,130)"/>
+    <comp lib="0" loc="(1770,130)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="ld_v"/></comp>
+    <wire from="(1800,150)" to="(1770,150)"/>
+    <comp lib="0" loc="(1770,150)" name="Constant"><a name="width" val="8"/><a name="value" val="0x2"/></comp>
+    <wire from="(1840,140)" to="(1870,140)"/>
+    <comp lib="0" loc="(1870,140)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="ld_x2"/></comp>
+    <wire from="(1820,120)" to="(1820,90)"/>
+    <comp lib="0" loc="(1820,90)" name="Constant"><a name="width" val="8"/><a name="value" val="0x0"/></comp>
+    <comp lib="3" loc="(1840,280)" name="Adder"><a name="width" val="8"/></comp>
+    <wire from="(1800,270)" to="(1770,270)"/>
+    <comp lib="0" loc="(1770,270)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="wash_base"/></comp>
+    <wire from="(1800,290)" to="(1770,290)"/>
+    <comp lib="0" loc="(1770,290)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="ld_x2"/></comp>
+    <wire from="(1840,280)" to="(1870,280)"/>
+    <comp lib="0" loc="(1870,280)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="w_sum"/></comp>
+    <wire from="(1820,260)" to="(1820,230)"/>
+    <comp lib="0" loc="(1820,230)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <comp lib="3" loc="(1840,420)" name="Adder"><a name="width" val="8"/></comp>
+    <wire from="(1800,410)" to="(1770,410)"/>
+    <comp lib="0" loc="(1770,410)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="w_sum"/></comp>
+    <wire from="(1800,430)" to="(1770,430)"/>
+    <comp lib="0" loc="(1770,430)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="soil_add"/></comp>
+    <wire from="(1840,420)" to="(1870,420)"/>
+    <comp lib="0" loc="(1870,420)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="wash_calc"/></comp>
+    <wire from="(1820,400)" to="(1820,370)"/>
+    <comp lib="0" loc="(1820,370)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <comp lib="3" loc="(1840,560)" name="Multiplier"><a name="width" val="8"/></comp>
+    <wire from="(1800,550)" to="(1770,550)"/>
+    <comp lib="0" loc="(1770,550)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="wl_v"/></comp>
+    <wire from="(1800,570)" to="(1770,570)"/>
+    <comp lib="0" loc="(1770,570)" name="Constant"><a name="width" val="8"/><a name="value" val="0x2"/></comp>
+    <wire from="(1840,560)" to="(1870,560)"/>
+    <comp lib="0" loc="(1870,560)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="wl_x2"/></comp>
+    <wire from="(1820,540)" to="(1820,510)"/>
+    <comp lib="0" loc="(1820,510)" name="Constant"><a name="width" val="8"/><a name="value" val="0x0"/></comp>
+    <comp lib="3" loc="(1840,700)" name="Adder"><a name="width" val="8"/></comp>
+    <wire from="(1800,690)" to="(1770,690)"/>
+    <comp lib="0" loc="(1770,690)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="wl_x2"/></comp>
+    <wire from="(1800,710)" to="(1770,710)"/>
+    <comp lib="0" loc="(1770,710)" name="Constant"><a name="width" val="8"/><a name="value" val="0x2"/></comp>
+    <wire from="(1840,700)" to="(1870,700)"/>
+    <comp lib="0" loc="(1870,700)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="rinse_calc"/></comp>
+    <wire from="(1820,680)" to="(1820,650)"/>
+    <comp lib="0" loc="(1820,650)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <comp lib="3" loc="(1840,840)" name="Adder"><a name="width" val="8"/></comp>
+    <wire from="(1800,830)" to="(1770,830)"/>
+    <comp lib="0" loc="(1770,830)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="spin_base"/></comp>
+    <wire from="(1800,850)" to="(1770,850)"/>
+    <comp lib="0" loc="(1770,850)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="ld_v"/></comp>
+    <wire from="(1840,840)" to="(1870,840)"/>
+    <comp lib="0" loc="(1870,840)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="spin_calc"/></comp>
+    <wire from="(1820,820)" to="(1820,790)"/>
+    <comp lib="0" loc="(1820,790)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <comp lib="2" loc="(1840,980)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1820,990)" to="(1820,1030)"/>
+    <comp lib="0" loc="(1820,1030)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="fixed"/></comp>
+    <wire from="(1810,970)" to="(1780,970)"/>
+    <comp lib="0" loc="(1780,970)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="wash_calc"/></comp>
+    <wire from="(1810,990)" to="(1780,990)"/>
+    <comp lib="0" loc="(1780,990)" name="Constant"><a name="width" val="8"/><a name="value" val="0x18"/></comp>
+    <wire from="(1840,980)" to="(1870,980)"/>
+    <comp lib="0" loc="(1870,980)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="wash_live"/></comp>
+    <comp lib="2" loc="(1840,1120)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1820,1130)" to="(1820,1170)"/>
+    <comp lib="0" loc="(1820,1170)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="fixed"/></comp>
+    <wire from="(1810,1110)" to="(1780,1110)"/>
+    <comp lib="0" loc="(1780,1110)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="rinse_calc"/></comp>
+    <wire from="(1810,1130)" to="(1780,1130)"/>
+    <comp lib="0" loc="(1780,1130)" name="Constant"><a name="width" val="8"/><a name="value" val="0xa"/></comp>
+    <wire from="(1840,1120)" to="(1870,1120)"/>
+    <comp lib="0" loc="(1870,1120)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="rinse_live"/></comp>
+    <comp lib="2" loc="(1840,1260)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1820,1270)" to="(1820,1310)"/>
+    <comp lib="0" loc="(1820,1310)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="fixed"/></comp>
+    <wire from="(1810,1250)" to="(1780,1250)"/>
+    <comp lib="0" loc="(1780,1250)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="spin_calc"/></comp>
+    <wire from="(1810,1270)" to="(1780,1270)"/>
+    <comp lib="0" loc="(1780,1270)" name="Constant"><a name="width" val="8"/><a name="value" val="0xc"/></comp>
+    <wire from="(1840,1260)" to="(1870,1260)"/>
+    <comp lib="0" loc="(1870,1260)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="spin_live"/></comp>
+    <comp lib="2" loc="(1840,1400)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(1820,1410)" to="(1820,1450)"/>
+    <comp lib="0" loc="(1820,1450)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="fixed"/></comp>
+    <wire from="(1810,1390)" to="(1780,1390)"/>
+    <comp lib="0" loc="(1780,1390)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="wl_x2"/></comp>
+    <wire from="(1810,1410)" to="(1780,1410)"/>
+    <comp lib="0" loc="(1780,1410)" name="Constant"><a name="width" val="8"/><a name="value" val="0x8"/></comp>
+    <wire from="(1840,1400)" to="(1870,1400)"/>
+    <comp lib="0" loc="(1870,1400)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="fill_live"/></comp>
+    <comp lib="3" loc="(1840,1540)" name="Subtractor"><a name="width" val="8"/></comp>
+    <wire from="(1800,1530)" to="(1770,1530)"/>
+    <comp lib="0" loc="(1770,1530)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="timer"/></comp>
+    <wire from="(1800,1550)" to="(1770,1550)"/>
+    <comp lib="0" loc="(1770,1550)" name="Constant"><a name="width" val="8"/><a name="value" val="0x1"/></comp>
+    <wire from="(1840,1540)" to="(1870,1540)"/>
+    <comp lib="0" loc="(1870,1540)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="t_dec"/></comp>
+    <wire from="(1820,1520)" to="(1820,1490)"/>
+    <comp lib="0" loc="(1820,1490)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <comp lib="3" loc="(1840,1680)" name="Adder"><a name="width" val="2"/></comp>
+    <wire from="(1800,1670)" to="(1770,1670)"/>
+    <comp lib="0" loc="(1770,1670)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="ext"/></comp>
+    <wire from="(1800,1690)" to="(1770,1690)"/>
+    <comp lib="0" loc="(1770,1690)" name="Constant"><a name="width" val="2"/><a name="value" val="0x1"/></comp>
+    <wire from="(1840,1680)" to="(1870,1680)"/>
+    <comp lib="0" loc="(1870,1680)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="2"/><a name="label" val="e_inc"/></comp>
+    <wire from="(1820,1660)" to="(1820,1630)"/>
+    <comp lib="0" loc="(1820,1630)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <comp lib="3" loc="(1840,1820)" name="Adder"><a name="width" val="2"/></comp>
+    <wire from="(1800,1810)" to="(1770,1810)"/>
+    <comp lib="0" loc="(1770,1810)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="att"/></comp>
+    <wire from="(1800,1830)" to="(1770,1830)"/>
+    <comp lib="0" loc="(1770,1830)" name="Constant"><a name="width" val="2"/><a name="value" val="0x1"/></comp>
+    <wire from="(1840,1820)" to="(1870,1820)"/>
+    <comp lib="0" loc="(1870,1820)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="2"/><a name="label" val="att_inc"/></comp>
+    <wire from="(1820,1800)" to="(1820,1770)"/>
+    <comp lib="0" loc="(1820,1770)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <comp lib="2" loc="(2320,140)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,150)" to="(2300,190)"/>
+    <comp lib="0" loc="(2300,190)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="fixed"/></comp>
+    <wire from="(2290,130)" to="(2260,130)"/>
+    <comp lib="0" loc="(2260,130)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(2290,150)" to="(2260,150)"/>
+    <comp lib="0" loc="(2260,150)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2320,140)" to="(2350,140)"/>
+    <comp lib="0" loc="(2350,140)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="fixed_n"/></comp>
+    <comp lib="2" loc="(2320,280)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,290)" to="(2300,330)"/>
+    <comp lib="0" loc="(2300,330)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="adapt_en"/></comp>
+    <wire from="(2290,270)" to="(2260,270)"/>
+    <comp lib="0" loc="(2260,270)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2290,290)" to="(2260,290)"/>
+    <comp lib="0" loc="(2260,290)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="fixed_n"/></comp>
+    <wire from="(2320,280)" to="(2350,280)"/>
+    <comp lib="0" loc="(2350,280)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="adapt_live"/></comp>
+    <comp lib="2" loc="(2320,420)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,430)" to="(2300,470)"/>
+    <comp lib="0" loc="(2300,470)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="bal_en"/></comp>
+    <wire from="(2290,410)" to="(2260,410)"/>
+    <comp lib="0" loc="(2260,410)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2290,430)" to="(2260,430)"/>
+    <comp lib="0" loc="(2260,430)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="fixed_n"/></comp>
+    <wire from="(2320,420)" to="(2350,420)"/>
+    <comp lib="0" loc="(2350,420)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="bal_live"/></comp>
+    <comp lib="2" loc="(2320,560)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,570)" to="(2300,610)"/>
+    <comp lib="0" loc="(2300,610)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_wash"/></comp>
+    <wire from="(2290,550)" to="(2260,550)"/>
+    <comp lib="0" loc="(2260,550)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="s_rinse"/></comp>
+    <wire from="(2290,570)" to="(2260,570)"/>
+    <comp lib="0" loc="(2260,570)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(2320,560)" to="(2350,560)"/>
+    <comp lib="0" loc="(2350,560)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="n1"/></comp>
+    <comp lib="2" loc="(2320,700)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,710)" to="(2300,750)"/>
+    <comp lib="0" loc="(2300,750)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="n1"/></comp>
+    <wire from="(2290,690)" to="(2260,690)"/>
+    <comp lib="0" loc="(2260,690)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="s_spin"/></comp>
+    <wire from="(2290,710)" to="(2260,710)"/>
+    <comp lib="0" loc="(2260,710)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(2320,700)" to="(2350,700)"/>
+    <comp lib="0" loc="(2350,700)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="n2"/></comp>
+    <comp lib="2" loc="(2320,840)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,850)" to="(2300,890)"/>
+    <comp lib="0" loc="(2300,890)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="n2"/></comp>
+    <wire from="(2290,830)" to="(2260,830)"/>
+    <comp lib="0" loc="(2260,830)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="s_rebal"/></comp>
+    <wire from="(2290,850)" to="(2260,850)"/>
+    <comp lib="0" loc="(2260,850)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(2320,840)" to="(2350,840)"/>
+    <comp lib="0" loc="(2350,840)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="busy"/></comp>
+    <comp lib="2" loc="(2320,980)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,990)" to="(2300,1030)"/>
+    <comp lib="0" loc="(2300,1030)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="busy"/></comp>
+    <wire from="(2290,970)" to="(2260,970)"/>
+    <comp lib="0" loc="(2260,970)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2290,990)" to="(2260,990)"/>
+    <comp lib="0" loc="(2260,990)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="tnz"/></comp>
+    <wire from="(2320,980)" to="(2350,980)"/>
+    <comp lib="0" loc="(2350,980)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="count_en"/></comp>
+    <comp lib="2" loc="(2320,1120)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,1130)" to="(2300,1170)"/>
+    <comp lib="0" loc="(2300,1170)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_idle"/></comp>
+    <wire from="(2290,1110)" to="(2260,1110)"/>
+    <comp lib="0" loc="(2260,1110)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2290,1130)" to="(2260,1130)"/>
+    <comp lib="0" loc="(2260,1130)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="start"/></comp>
+    <wire from="(2320,1120)" to="(2350,1120)"/>
+    <comp lib="0" loc="(2350,1120)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="go_wash"/></comp>
+    <comp lib="2" loc="(2320,1260)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,1270)" to="(2300,1310)"/>
+    <comp lib="0" loc="(2300,1310)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="start"/></comp>
+    <wire from="(2290,1250)" to="(2260,1250)"/>
+    <comp lib="0" loc="(2260,1250)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(2290,1270)" to="(2260,1270)"/>
+    <comp lib="0" loc="(2260,1270)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2320,1260)" to="(2350,1260)"/>
+    <comp lib="0" loc="(2350,1260)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="start_n"/></comp>
+    <comp lib="2" loc="(2320,1400)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,1410)" to="(2300,1450)"/>
+    <comp lib="0" loc="(2300,1450)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_end"/></comp>
+    <wire from="(2290,1390)" to="(2260,1390)"/>
+    <comp lib="0" loc="(2260,1390)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2290,1410)" to="(2260,1410)"/>
+    <comp lib="0" loc="(2260,1410)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="start_n"/></comp>
+    <wire from="(2320,1400)" to="(2350,1400)"/>
+    <comp lib="0" loc="(2350,1400)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="end_rel"/></comp>
+    <comp lib="2" loc="(2320,1540)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,1550)" to="(2300,1590)"/>
+    <comp lib="0" loc="(2300,1590)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_wash"/></comp>
+    <wire from="(2290,1530)" to="(2260,1530)"/>
+    <comp lib="0" loc="(2260,1530)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2290,1550)" to="(2260,1550)"/>
+    <comp lib="0" loc="(2260,1550)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="tz"/></comp>
+    <wire from="(2320,1540)" to="(2350,1540)"/>
+    <comp lib="0" loc="(2350,1540)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="wash_end"/></comp>
+    <comp lib="2" loc="(2320,1680)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,1690)" to="(2300,1730)"/>
+    <comp lib="0" loc="(2300,1730)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_rinse"/></comp>
+    <wire from="(2290,1670)" to="(2260,1670)"/>
+    <comp lib="0" loc="(2260,1670)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2290,1690)" to="(2260,1690)"/>
+    <comp lib="0" loc="(2260,1690)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="tz"/></comp>
+    <wire from="(2320,1680)" to="(2350,1680)"/>
+    <comp lib="0" loc="(2350,1680)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="rinse_end"/></comp>
+    <comp lib="2" loc="(2320,1820)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,1830)" to="(2300,1870)"/>
+    <comp lib="0" loc="(2300,1870)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_spin"/></comp>
+    <wire from="(2290,1810)" to="(2260,1810)"/>
+    <comp lib="0" loc="(2260,1810)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2290,1830)" to="(2260,1830)"/>
+    <comp lib="0" loc="(2260,1830)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="tz"/></comp>
+    <wire from="(2320,1820)" to="(2350,1820)"/>
+    <comp lib="0" loc="(2350,1820)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="to_end"/></comp>
+    <comp lib="2" loc="(2320,1960)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,1970)" to="(2300,2010)"/>
+    <comp lib="0" loc="(2300,2010)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_rebal"/></comp>
+    <wire from="(2290,1950)" to="(2260,1950)"/>
+    <comp lib="0" loc="(2260,1950)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2290,1970)" to="(2260,1970)"/>
+    <comp lib="0" loc="(2260,1970)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="tz"/></comp>
+    <wire from="(2320,1960)" to="(2350,1960)"/>
+    <comp lib="0" loc="(2350,1960)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="rebal_end"/></comp>
+    <comp lib="2" loc="(2320,2100)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,2110)" to="(2300,2150)"/>
+    <comp lib="0" loc="(2300,2150)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="turb_hi"/></comp>
+    <wire from="(2290,2090)" to="(2260,2090)"/>
+    <comp lib="0" loc="(2260,2090)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2290,2110)" to="(2260,2110)"/>
+    <comp lib="0" loc="(2260,2110)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="ext_lt"/></comp>
+    <wire from="(2320,2100)" to="(2350,2100)"/>
+    <comp lib="0" loc="(2350,2100)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="n3"/></comp>
+    <comp lib="2" loc="(2320,2240)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,2250)" to="(2300,2290)"/>
+    <comp lib="0" loc="(2300,2290)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="adapt_eff"/></comp>
+    <wire from="(2290,2230)" to="(2260,2230)"/>
+    <comp lib="0" loc="(2260,2230)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2290,2250)" to="(2260,2250)"/>
+    <comp lib="0" loc="(2260,2250)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="n3"/></comp>
+    <wire from="(2320,2240)" to="(2350,2240)"/>
+    <comp lib="0" loc="(2350,2240)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="ext_ok"/></comp>
+    <comp lib="2" loc="(2320,2380)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,2390)" to="(2300,2430)"/>
+    <comp lib="0" loc="(2300,2430)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="ext_ok"/></comp>
+    <wire from="(2290,2370)" to="(2260,2370)"/>
+    <comp lib="0" loc="(2260,2370)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(2290,2390)" to="(2260,2390)"/>
+    <comp lib="0" loc="(2260,2390)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2320,2380)" to="(2350,2380)"/>
+    <comp lib="0" loc="(2350,2380)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="ext_no"/></comp>
+    <comp lib="2" loc="(2320,2520)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,2530)" to="(2300,2570)"/>
+    <comp lib="0" loc="(2300,2570)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="wash_end"/></comp>
+    <wire from="(2290,2510)" to="(2260,2510)"/>
+    <comp lib="0" loc="(2260,2510)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2290,2530)" to="(2260,2530)"/>
+    <comp lib="0" loc="(2260,2530)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="ext_ok"/></comp>
+    <wire from="(2320,2520)" to="(2350,2520)"/>
+    <comp lib="0" loc="(2350,2520)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="ext_w"/></comp>
+    <comp lib="2" loc="(2320,2660)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,2670)" to="(2300,2710)"/>
+    <comp lib="0" loc="(2300,2710)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="rinse_end"/></comp>
+    <wire from="(2290,2650)" to="(2260,2650)"/>
+    <comp lib="0" loc="(2260,2650)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2290,2670)" to="(2260,2670)"/>
+    <comp lib="0" loc="(2260,2670)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="ext_ok"/></comp>
+    <wire from="(2320,2660)" to="(2350,2660)"/>
+    <comp lib="0" loc="(2350,2660)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="ext_r"/></comp>
+    <comp lib="2" loc="(2320,2800)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,2810)" to="(2300,2850)"/>
+    <comp lib="0" loc="(2300,2850)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="ext_w"/></comp>
+    <wire from="(2290,2790)" to="(2260,2790)"/>
+    <comp lib="0" loc="(2260,2790)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="ext_r"/></comp>
+    <wire from="(2290,2810)" to="(2260,2810)"/>
+    <comp lib="0" loc="(2260,2810)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(2320,2800)" to="(2350,2800)"/>
+    <comp lib="0" loc="(2350,2800)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="ext_ev"/></comp>
+    <comp lib="2" loc="(2320,2940)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,2950)" to="(2300,2990)"/>
+    <comp lib="0" loc="(2300,2990)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="wash_end"/></comp>
+    <wire from="(2290,2930)" to="(2260,2930)"/>
+    <comp lib="0" loc="(2260,2930)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2290,2950)" to="(2260,2950)"/>
+    <comp lib="0" loc="(2260,2950)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="ext_no"/></comp>
+    <wire from="(2320,2940)" to="(2350,2940)"/>
+    <comp lib="0" loc="(2350,2940)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="to_rinse"/></comp>
+    <comp lib="2" loc="(2320,3080)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,3090)" to="(2300,3130)"/>
+    <comp lib="0" loc="(2300,3130)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="rinse_end"/></comp>
+    <wire from="(2290,3070)" to="(2260,3070)"/>
+    <comp lib="0" loc="(2260,3070)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(2290,3090)" to="(2260,3090)"/>
+    <comp lib="0" loc="(2260,3090)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="ext_no"/></comp>
+    <wire from="(2320,3080)" to="(2350,3080)"/>
+    <comp lib="0" loc="(2350,3080)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="to_spin"/></comp>
+    <comp lib="2" loc="(2320,3220)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,3230)" to="(2300,3270)"/>
+    <comp lib="0" loc="(2300,3270)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="to_spin"/></comp>
+    <wire from="(2290,3210)" to="(2260,3210)"/>
+    <comp lib="0" loc="(2260,3210)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="rebal_end"/></comp>
+    <wire from="(2290,3230)" to="(2260,3230)"/>
+    <comp lib="0" loc="(2260,3230)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(2320,3220)" to="(2350,3220)"/>
+    <comp lib="0" loc="(2350,3220)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="to_spin_any"/></comp>
+    <comp lib="2" loc="(2320,3360)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,3370)" to="(2300,3410)"/>
+    <comp lib="0" loc="(2300,3410)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="to_rinse"/></comp>
+    <wire from="(2290,3350)" to="(2260,3350)"/>
+    <comp lib="0" loc="(2260,3350)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="to_spin"/></comp>
+    <wire from="(2290,3370)" to="(2260,3370)"/>
+    <comp lib="0" loc="(2260,3370)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(2320,3360)" to="(2350,3360)"/>
+    <comp lib="0" loc="(2350,3360)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="n4"/></comp>
+    <comp lib="2" loc="(2320,3500)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2300,3510)" to="(2300,3550)"/>
+    <comp lib="0" loc="(2300,3550)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="go_wash"/></comp>
+    <wire from="(2290,3490)" to="(2260,3490)"/>
+    <comp lib="0" loc="(2260,3490)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="n4"/></comp>
+    <wire from="(2290,3510)" to="(2260,3510)"/>
+    <comp lib="0" loc="(2260,3510)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(2320,3500)" to="(2350,3500)"/>
+    <comp lib="0" loc="(2350,3500)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="chg"/></comp>
+    <comp lib="4" loc="(2800,140)" name="Register"><a name="width" val="8"/><a name="label" val="WASH_LATCH"/><a name="labelloc" val="north"/></comp>
+    <wire from="(2800,170)" to="(2770,170)"/>
+    <comp lib="0" loc="(2770,170)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="wash_live"/></comp>
+    <wire from="(2800,190)" to="(2770,190)"/>
+    <comp lib="0" loc="(2770,190)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="s_idle"/></comp>
+    <wire from="(2800,210)" to="(2770,210)"/>
+    <comp lib="0" loc="(2770,210)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="clk"/></comp>
+    <wire from="(2860,170)" to="(2890,170)"/>
+    <comp lib="0" loc="(2890,170)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="wash_lat"/></comp>
+    <wire from="(2830,230)" to="(2830,260)"/>
+    <comp lib="0" loc="(2830,260)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="reset"/></comp>
+    <comp lib="2" loc="(2800,280)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(2780,290)" to="(2780,330)"/>
+    <comp lib="0" loc="(2780,330)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_idle"/></comp>
+    <wire from="(2770,270)" to="(2740,270)"/>
+    <comp lib="0" loc="(2740,270)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="wash_lat"/></comp>
+    <wire from="(2770,290)" to="(2740,290)"/>
+    <comp lib="0" loc="(2740,290)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="wash_live"/></comp>
+    <wire from="(2800,280)" to="(2830,280)"/>
+    <comp lib="0" loc="(2830,280)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="wash_time"/></comp>
+    <comp lib="4" loc="(2800,420)" name="Register"><a name="width" val="8"/><a name="label" val="RINSE_LATCH"/><a name="labelloc" val="north"/></comp>
+    <wire from="(2800,450)" to="(2770,450)"/>
+    <comp lib="0" loc="(2770,450)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="rinse_live"/></comp>
+    <wire from="(2800,470)" to="(2770,470)"/>
+    <comp lib="0" loc="(2770,470)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="s_idle"/></comp>
+    <wire from="(2800,490)" to="(2770,490)"/>
+    <comp lib="0" loc="(2770,490)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="clk"/></comp>
+    <wire from="(2860,450)" to="(2890,450)"/>
+    <comp lib="0" loc="(2890,450)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="rinse_lat"/></comp>
+    <wire from="(2830,510)" to="(2830,540)"/>
+    <comp lib="0" loc="(2830,540)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="reset"/></comp>
+    <comp lib="2" loc="(2800,560)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(2780,570)" to="(2780,610)"/>
+    <comp lib="0" loc="(2780,610)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_idle"/></comp>
+    <wire from="(2770,550)" to="(2740,550)"/>
+    <comp lib="0" loc="(2740,550)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="rinse_lat"/></comp>
+    <wire from="(2770,570)" to="(2740,570)"/>
+    <comp lib="0" loc="(2740,570)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="rinse_live"/></comp>
+    <wire from="(2800,560)" to="(2830,560)"/>
+    <comp lib="0" loc="(2830,560)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="rinse_time"/></comp>
+    <comp lib="4" loc="(2800,700)" name="Register"><a name="width" val="8"/><a name="label" val="SPIN_LATCH"/><a name="labelloc" val="north"/></comp>
+    <wire from="(2800,730)" to="(2770,730)"/>
+    <comp lib="0" loc="(2770,730)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="spin_live"/></comp>
+    <wire from="(2800,750)" to="(2770,750)"/>
+    <comp lib="0" loc="(2770,750)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="s_idle"/></comp>
+    <wire from="(2800,770)" to="(2770,770)"/>
+    <comp lib="0" loc="(2770,770)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="clk"/></comp>
+    <wire from="(2860,730)" to="(2890,730)"/>
+    <comp lib="0" loc="(2890,730)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="spin_lat"/></comp>
+    <wire from="(2830,790)" to="(2830,820)"/>
+    <comp lib="0" loc="(2830,820)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="reset"/></comp>
+    <comp lib="2" loc="(2800,840)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(2780,850)" to="(2780,890)"/>
+    <comp lib="0" loc="(2780,890)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_idle"/></comp>
+    <wire from="(2770,830)" to="(2740,830)"/>
+    <comp lib="0" loc="(2740,830)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="spin_lat"/></comp>
+    <wire from="(2770,850)" to="(2740,850)"/>
+    <comp lib="0" loc="(2740,850)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="spin_live"/></comp>
+    <wire from="(2800,840)" to="(2830,840)"/>
+    <comp lib="0" loc="(2830,840)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="spin_time"/></comp>
+    <comp lib="4" loc="(2800,980)" name="Register"><a name="width" val="8"/><a name="label" val="FILL_LATCH"/><a name="labelloc" val="north"/></comp>
+    <wire from="(2800,1010)" to="(2770,1010)"/>
+    <comp lib="0" loc="(2770,1010)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="fill_live"/></comp>
+    <wire from="(2800,1030)" to="(2770,1030)"/>
+    <comp lib="0" loc="(2770,1030)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="s_idle"/></comp>
+    <wire from="(2800,1050)" to="(2770,1050)"/>
+    <comp lib="0" loc="(2770,1050)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="clk"/></comp>
+    <wire from="(2860,1010)" to="(2890,1010)"/>
+    <comp lib="0" loc="(2890,1010)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="fill_lat"/></comp>
+    <wire from="(2830,1070)" to="(2830,1100)"/>
+    <comp lib="0" loc="(2830,1100)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="reset"/></comp>
+    <comp lib="2" loc="(2800,1120)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(2780,1130)" to="(2780,1170)"/>
+    <comp lib="0" loc="(2780,1170)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_idle"/></comp>
+    <wire from="(2770,1110)" to="(2740,1110)"/>
+    <comp lib="0" loc="(2740,1110)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="fill_lat"/></comp>
+    <wire from="(2770,1130)" to="(2740,1130)"/>
+    <comp lib="0" loc="(2740,1130)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="fill_live"/></comp>
+    <wire from="(2800,1120)" to="(2830,1120)"/>
+    <comp lib="0" loc="(2830,1120)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="water_fill"/></comp>
+    <comp lib="4" loc="(2800,1260)" name="Register"><a name="width" val="1"/><a name="label" val="ADAPT_LATCH"/><a name="labelloc" val="north"/></comp>
+    <wire from="(2800,1290)" to="(2770,1290)"/>
+    <comp lib="0" loc="(2770,1290)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="adapt_live"/></comp>
+    <wire from="(2800,1310)" to="(2770,1310)"/>
+    <comp lib="0" loc="(2770,1310)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="s_idle"/></comp>
+    <wire from="(2800,1330)" to="(2770,1330)"/>
+    <comp lib="0" loc="(2770,1330)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="clk"/></comp>
+    <wire from="(2860,1290)" to="(2890,1290)"/>
+    <comp lib="0" loc="(2890,1290)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="adapt_lat"/></comp>
+    <wire from="(2830,1350)" to="(2830,1380)"/>
+    <comp lib="0" loc="(2830,1380)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="reset"/></comp>
+    <comp lib="2" loc="(2800,1400)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2780,1410)" to="(2780,1450)"/>
+    <comp lib="0" loc="(2780,1450)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_idle"/></comp>
+    <wire from="(2770,1390)" to="(2740,1390)"/>
+    <comp lib="0" loc="(2740,1390)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="adapt_lat"/></comp>
+    <wire from="(2770,1410)" to="(2740,1410)"/>
+    <comp lib="0" loc="(2740,1410)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="adapt_live"/></comp>
+    <wire from="(2800,1400)" to="(2830,1400)"/>
+    <comp lib="0" loc="(2830,1400)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="adapt_eff"/></comp>
+    <comp lib="4" loc="(2800,1540)" name="Register"><a name="width" val="1"/><a name="label" val="BAL_LATCH"/><a name="labelloc" val="north"/></comp>
+    <wire from="(2800,1570)" to="(2770,1570)"/>
+    <comp lib="0" loc="(2770,1570)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="bal_live"/></comp>
+    <wire from="(2800,1590)" to="(2770,1590)"/>
+    <comp lib="0" loc="(2770,1590)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="s_idle"/></comp>
+    <wire from="(2800,1610)" to="(2770,1610)"/>
+    <comp lib="0" loc="(2770,1610)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="clk"/></comp>
+    <wire from="(2860,1570)" to="(2890,1570)"/>
+    <comp lib="0" loc="(2890,1570)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="bal_lat"/></comp>
+    <wire from="(2830,1630)" to="(2830,1660)"/>
+    <comp lib="0" loc="(2830,1660)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="reset"/></comp>
+    <comp lib="2" loc="(2800,1680)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(2780,1690)" to="(2780,1730)"/>
+    <comp lib="0" loc="(2780,1730)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_idle"/></comp>
+    <wire from="(2770,1670)" to="(2740,1670)"/>
+    <comp lib="0" loc="(2740,1670)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="bal_lat"/></comp>
+    <wire from="(2770,1690)" to="(2740,1690)"/>
+    <comp lib="0" loc="(2740,1690)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="bal_live"/></comp>
+    <wire from="(2800,1680)" to="(2830,1680)"/>
+    <comp lib="0" loc="(2830,1680)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="bal_eff"/></comp>
+    <comp lib="2" loc="(3280,140)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(3260,150)" to="(3260,190)"/>
+    <comp lib="0" loc="(3260,190)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="bal_eff"/></comp>
+    <wire from="(3250,130)" to="(3220,130)"/>
+    <comp lib="0" loc="(3220,130)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(3250,150)" to="(3220,150)"/>
+    <comp lib="0" loc="(3220,150)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="bal_hi"/></comp>
+    <wire from="(3280,140)" to="(3310,140)"/>
+    <comp lib="0" loc="(3310,140)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="bal_bad"/></comp>
+    <comp lib="2" loc="(3280,280)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(3260,290)" to="(3260,330)"/>
+    <comp lib="0" loc="(3260,330)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="bal_bad"/></comp>
+    <wire from="(3250,270)" to="(3220,270)"/>
+    <comp lib="0" loc="(3220,270)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(3250,290)" to="(3220,290)"/>
+    <comp lib="0" loc="(3220,290)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(3280,280)" to="(3310,280)"/>
+    <comp lib="0" loc="(3310,280)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="bal_ok"/></comp>
+    <comp lib="2" loc="(3280,420)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(3260,430)" to="(3260,470)"/>
+    <comp lib="0" loc="(3260,470)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="att_lt"/></comp>
+    <wire from="(3250,410)" to="(3220,410)"/>
+    <comp lib="0" loc="(3220,410)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(3250,430)" to="(3220,430)"/>
+    <comp lib="0" loc="(3220,430)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(3280,420)" to="(3310,420)"/>
+    <comp lib="0" loc="(3310,420)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="att_ge"/></comp>
+    <comp lib="2" loc="(3280,560)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(3260,570)" to="(3260,610)"/>
+    <comp lib="0" loc="(3260,610)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="bal_bad"/></comp>
+    <wire from="(3250,550)" to="(3220,550)"/>
+    <comp lib="0" loc="(3220,550)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(3250,570)" to="(3220,570)"/>
+    <comp lib="0" loc="(3220,570)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="att_lt"/></comp>
+    <wire from="(3280,560)" to="(3310,560)"/>
+    <comp lib="0" loc="(3310,560)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="bad_retry"/></comp>
+    <comp lib="2" loc="(3280,700)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(3260,710)" to="(3260,750)"/>
+    <comp lib="0" loc="(3260,750)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="bal_bad"/></comp>
+    <wire from="(3250,690)" to="(3220,690)"/>
+    <comp lib="0" loc="(3220,690)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(3250,710)" to="(3220,710)"/>
+    <comp lib="0" loc="(3220,710)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="att_ge"/></comp>
+    <wire from="(3280,700)" to="(3310,700)"/>
+    <comp lib="0" loc="(3310,700)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="bad_abort"/></comp>
+    <comp lib="2" loc="(3280,840)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(3260,850)" to="(3260,890)"/>
+    <comp lib="0" loc="(3260,890)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_spin"/></comp>
+    <wire from="(3250,830)" to="(3220,830)"/>
+    <comp lib="0" loc="(3220,830)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(3250,850)" to="(3220,850)"/>
+    <comp lib="0" loc="(3220,850)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="bad_retry"/></comp>
+    <wire from="(3280,840)" to="(3310,840)"/>
+    <comp lib="0" loc="(3310,840)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="spin_rebal"/></comp>
+    <comp lib="2" loc="(3280,980)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(3260,990)" to="(3260,1030)"/>
+    <comp lib="0" loc="(3260,1030)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_spin"/></comp>
+    <wire from="(3250,970)" to="(3220,970)"/>
+    <comp lib="0" loc="(3220,970)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(3250,990)" to="(3220,990)"/>
+    <comp lib="0" loc="(3220,990)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="bad_abort"/></comp>
+    <wire from="(3280,980)" to="(3310,980)"/>
+    <comp lib="0" loc="(3310,980)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="spin_abort"/></comp>
+    <comp lib="2" loc="(3280,1120)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(3260,1130)" to="(3260,1170)"/>
+    <comp lib="0" loc="(3260,1170)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="to_spin_any"/></comp>
+    <wire from="(3250,1110)" to="(3220,1110)"/>
+    <comp lib="0" loc="(3220,1110)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(3250,1130)" to="(3220,1130)"/>
+    <comp lib="0" loc="(3220,1130)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="bal_ok"/></comp>
+    <wire from="(3280,1120)" to="(3310,1120)"/>
+    <comp lib="0" loc="(3310,1120)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="to_spin_ok"/></comp>
+    <comp lib="2" loc="(3280,1260)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(3260,1270)" to="(3260,1310)"/>
+    <comp lib="0" loc="(3260,1310)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="to_spin_any"/></comp>
+    <wire from="(3250,1250)" to="(3220,1250)"/>
+    <comp lib="0" loc="(3220,1250)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(3250,1270)" to="(3220,1270)"/>
+    <comp lib="0" loc="(3220,1270)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="bad_retry"/></comp>
+    <wire from="(3280,1260)" to="(3310,1260)"/>
+    <comp lib="0" loc="(3310,1260)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="pre_rebal"/></comp>
+    <comp lib="2" loc="(3280,1400)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(3260,1410)" to="(3260,1450)"/>
+    <comp lib="0" loc="(3260,1450)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="to_spin_any"/></comp>
+    <wire from="(3250,1390)" to="(3220,1390)"/>
+    <comp lib="0" loc="(3220,1390)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(3250,1410)" to="(3220,1410)"/>
+    <comp lib="0" loc="(3220,1410)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="bad_abort"/></comp>
+    <wire from="(3280,1400)" to="(3310,1400)"/>
+    <comp lib="0" loc="(3310,1400)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="pre_abort"/></comp>
+    <comp lib="2" loc="(3280,1540)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(3260,1550)" to="(3260,1590)"/>
+    <comp lib="0" loc="(3260,1590)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="spin_rebal"/></comp>
+    <wire from="(3250,1530)" to="(3220,1530)"/>
+    <comp lib="0" loc="(3220,1530)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="pre_rebal"/></comp>
+    <wire from="(3250,1550)" to="(3220,1550)"/>
+    <comp lib="0" loc="(3220,1550)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(3280,1540)" to="(3310,1540)"/>
+    <comp lib="0" loc="(3310,1540)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="rebal_all"/></comp>
+    <comp lib="2" loc="(3280,1680)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(3260,1690)" to="(3260,1730)"/>
+    <comp lib="0" loc="(3260,1730)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="spin_abort"/></comp>
+    <wire from="(3250,1670)" to="(3220,1670)"/>
+    <comp lib="0" loc="(3220,1670)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="pre_abort"/></comp>
+    <wire from="(3250,1690)" to="(3220,1690)"/>
+    <comp lib="0" loc="(3220,1690)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(3280,1680)" to="(3310,1680)"/>
+    <comp lib="0" loc="(3310,1680)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="abort_all"/></comp>
+    <comp lib="2" loc="(3280,1820)" name="Multiplexer"><a name="width" val="2"/></comp>
+    <wire from="(3260,1830)" to="(3260,1870)"/>
+    <comp lib="0" loc="(3260,1870)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="rebal_all"/></comp>
+    <wire from="(3250,1810)" to="(3220,1810)"/>
+    <comp lib="0" loc="(3220,1810)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="att"/></comp>
+    <wire from="(3250,1830)" to="(3220,1830)"/>
+    <comp lib="0" loc="(3220,1830)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="att_inc"/></comp>
+    <wire from="(3280,1820)" to="(3310,1820)"/>
+    <comp lib="0" loc="(3310,1820)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="2"/><a name="label" val="a1"/></comp>
+    <comp lib="2" loc="(3280,1960)" name="Multiplexer"><a name="width" val="2"/></comp>
+    <wire from="(3260,1970)" to="(3260,2010)"/>
+    <comp lib="0" loc="(3260,2010)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="go_wash"/></comp>
+    <wire from="(3250,1950)" to="(3220,1950)"/>
+    <comp lib="0" loc="(3220,1950)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="a1"/></comp>
+    <wire from="(3250,1970)" to="(3220,1970)"/>
+    <comp lib="0" loc="(3220,1970)" name="Constant"><a name="width" val="2"/><a name="value" val="0x0"/></comp>
+    <wire from="(3280,1960)" to="(3310,1960)"/>
+    <comp lib="0" loc="(3310,1960)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="2"/><a name="label" val="att_next"/></comp>
+    <comp lib="2" loc="(3280,2100)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(3260,2110)" to="(3260,2150)"/>
+    <comp lib="0" loc="(3260,2150)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="fault"/></comp>
+    <wire from="(3250,2090)" to="(3220,2090)"/>
+    <comp lib="0" loc="(3220,2090)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="abort_all"/></comp>
+    <wire from="(3250,2110)" to="(3220,2110)"/>
+    <comp lib="0" loc="(3220,2110)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(3280,2100)" to="(3310,2100)"/>
+    <comp lib="0" loc="(3310,2100)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="f1"/></comp>
+    <comp lib="2" loc="(3280,2240)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(3260,2250)" to="(3260,2290)"/>
+    <comp lib="0" loc="(3260,2290)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="go_wash"/></comp>
+    <wire from="(3250,2230)" to="(3220,2230)"/>
+    <comp lib="0" loc="(3220,2230)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="f1"/></comp>
+    <wire from="(3250,2250)" to="(3220,2250)"/>
+    <comp lib="0" loc="(3220,2250)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(3280,2240)" to="(3310,2240)"/>
+    <comp lib="0" loc="(3310,2240)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="fault_next"/></comp>
+    <comp lib="2" loc="(3760,140)" name="Multiplexer"><a name="width" val="3"/></comp>
+    <wire from="(3740,150)" to="(3740,190)"/>
+    <comp lib="0" loc="(3740,190)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="go_wash"/></comp>
+    <wire from="(3730,130)" to="(3700,130)"/>
+    <comp lib="0" loc="(3700,130)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="state"/></comp>
+    <wire from="(3730,150)" to="(3700,150)"/>
+    <comp lib="0" loc="(3700,150)" name="Constant"><a name="width" val="3"/><a name="value" val="0x1"/></comp>
+    <wire from="(3760,140)" to="(3790,140)"/>
+    <comp lib="0" loc="(3790,140)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="3"/><a name="label" val="ns1"/></comp>
+    <comp lib="2" loc="(3760,280)" name="Multiplexer"><a name="width" val="3"/></comp>
+    <wire from="(3740,290)" to="(3740,330)"/>
+    <comp lib="0" loc="(3740,330)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="to_rinse"/></comp>
+    <wire from="(3730,270)" to="(3700,270)"/>
+    <comp lib="0" loc="(3700,270)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="ns1"/></comp>
+    <wire from="(3730,290)" to="(3700,290)"/>
+    <comp lib="0" loc="(3700,290)" name="Constant"><a name="width" val="3"/><a name="value" val="0x2"/></comp>
+    <wire from="(3760,280)" to="(3790,280)"/>
+    <comp lib="0" loc="(3790,280)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="3"/><a name="label" val="ns2"/></comp>
+    <comp lib="2" loc="(3760,420)" name="Multiplexer"><a name="width" val="3"/></comp>
+    <wire from="(3740,430)" to="(3740,470)"/>
+    <comp lib="0" loc="(3740,470)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="to_spin_ok"/></comp>
+    <wire from="(3730,410)" to="(3700,410)"/>
+    <comp lib="0" loc="(3700,410)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="ns2"/></comp>
+    <wire from="(3730,430)" to="(3700,430)"/>
+    <comp lib="0" loc="(3700,430)" name="Constant"><a name="width" val="3"/><a name="value" val="0x3"/></comp>
+    <wire from="(3760,420)" to="(3790,420)"/>
+    <comp lib="0" loc="(3790,420)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="3"/><a name="label" val="ns3"/></comp>
+    <comp lib="2" loc="(3760,560)" name="Multiplexer"><a name="width" val="3"/></comp>
+    <wire from="(3740,570)" to="(3740,610)"/>
+    <comp lib="0" loc="(3740,610)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="to_end"/></comp>
+    <wire from="(3730,550)" to="(3700,550)"/>
+    <comp lib="0" loc="(3700,550)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="ns3"/></comp>
+    <wire from="(3730,570)" to="(3700,570)"/>
+    <comp lib="0" loc="(3700,570)" name="Constant"><a name="width" val="3"/><a name="value" val="0x4"/></comp>
+    <wire from="(3760,560)" to="(3790,560)"/>
+    <comp lib="0" loc="(3790,560)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="3"/><a name="label" val="ns4"/></comp>
+    <comp lib="2" loc="(3760,700)" name="Multiplexer"><a name="width" val="3"/></comp>
+    <wire from="(3740,710)" to="(3740,750)"/>
+    <comp lib="0" loc="(3740,750)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="rebal_all"/></comp>
+    <wire from="(3730,690)" to="(3700,690)"/>
+    <comp lib="0" loc="(3700,690)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="ns4"/></comp>
+    <wire from="(3730,710)" to="(3700,710)"/>
+    <comp lib="0" loc="(3700,710)" name="Constant"><a name="width" val="3"/><a name="value" val="0x5"/></comp>
+    <wire from="(3760,700)" to="(3790,700)"/>
+    <comp lib="0" loc="(3790,700)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="3"/><a name="label" val="ns5"/></comp>
+    <comp lib="2" loc="(3760,840)" name="Multiplexer"><a name="width" val="3"/></comp>
+    <wire from="(3740,850)" to="(3740,890)"/>
+    <comp lib="0" loc="(3740,890)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="abort_all"/></comp>
+    <wire from="(3730,830)" to="(3700,830)"/>
+    <comp lib="0" loc="(3700,830)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="ns5"/></comp>
+    <wire from="(3730,850)" to="(3700,850)"/>
+    <comp lib="0" loc="(3700,850)" name="Constant"><a name="width" val="3"/><a name="value" val="0x4"/></comp>
+    <wire from="(3760,840)" to="(3790,840)"/>
+    <comp lib="0" loc="(3790,840)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="3"/><a name="label" val="ns6"/></comp>
+    <comp lib="2" loc="(3760,980)" name="Multiplexer"><a name="width" val="3"/></comp>
+    <wire from="(3740,990)" to="(3740,1030)"/>
+    <comp lib="0" loc="(3740,1030)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="end_rel"/></comp>
+    <wire from="(3730,970)" to="(3700,970)"/>
+    <comp lib="0" loc="(3700,970)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="ns6"/></comp>
+    <wire from="(3730,990)" to="(3700,990)"/>
+    <comp lib="0" loc="(3700,990)" name="Constant"><a name="width" val="3"/><a name="value" val="0x0"/></comp>
+    <wire from="(3760,980)" to="(3790,980)"/>
+    <comp lib="0" loc="(3790,980)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="3"/><a name="label" val="ns7"/></comp>
+    <comp lib="2" loc="(3760,1120)" name="Multiplexer"><a name="width" val="3"/></comp>
+    <wire from="(3740,1130)" to="(3740,1170)"/>
+    <comp lib="0" loc="(3740,1170)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_inval"/></comp>
+    <wire from="(3730,1110)" to="(3700,1110)"/>
+    <comp lib="0" loc="(3700,1110)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="ns7"/></comp>
+    <wire from="(3730,1130)" to="(3700,1130)"/>
+    <comp lib="0" loc="(3700,1130)" name="Constant"><a name="width" val="3"/><a name="value" val="0x0"/></comp>
+    <wire from="(3760,1120)" to="(3790,1120)"/>
+    <comp lib="0" loc="(3790,1120)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="3"/><a name="label" val="state_next"/></comp>
+    <comp lib="2" loc="(3760,1260)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(3740,1270)" to="(3740,1310)"/>
+    <comp lib="0" loc="(3740,1310)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="count_en"/></comp>
+    <wire from="(3730,1250)" to="(3700,1250)"/>
+    <comp lib="0" loc="(3700,1250)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="timer"/></comp>
+    <wire from="(3730,1270)" to="(3700,1270)"/>
+    <comp lib="0" loc="(3700,1270)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="t_dec"/></comp>
+    <wire from="(3760,1260)" to="(3790,1260)"/>
+    <comp lib="0" loc="(3790,1260)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="tb"/></comp>
+    <comp lib="2" loc="(3760,1400)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(3740,1410)" to="(3740,1450)"/>
+    <comp lib="0" loc="(3740,1450)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="go_wash"/></comp>
+    <wire from="(3730,1390)" to="(3700,1390)"/>
+    <comp lib="0" loc="(3700,1390)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="tb"/></comp>
+    <wire from="(3730,1410)" to="(3700,1410)"/>
+    <comp lib="0" loc="(3700,1410)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="wash_time"/></comp>
+    <wire from="(3760,1400)" to="(3790,1400)"/>
+    <comp lib="0" loc="(3790,1400)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="t1"/></comp>
+    <comp lib="2" loc="(3760,1540)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(3740,1550)" to="(3740,1590)"/>
+    <comp lib="0" loc="(3740,1590)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="ext_ev"/></comp>
+    <wire from="(3730,1530)" to="(3700,1530)"/>
+    <comp lib="0" loc="(3700,1530)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="t1"/></comp>
+    <wire from="(3730,1550)" to="(3700,1550)"/>
+    <comp lib="0" loc="(3700,1550)" name="Constant"><a name="width" val="8"/><a name="value" val="0x3"/></comp>
+    <wire from="(3760,1540)" to="(3790,1540)"/>
+    <comp lib="0" loc="(3790,1540)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="t2"/></comp>
+    <comp lib="2" loc="(3760,1680)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(3740,1690)" to="(3740,1730)"/>
+    <comp lib="0" loc="(3740,1730)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="to_rinse"/></comp>
+    <wire from="(3730,1670)" to="(3700,1670)"/>
+    <comp lib="0" loc="(3700,1670)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="t2"/></comp>
+    <wire from="(3730,1690)" to="(3700,1690)"/>
+    <comp lib="0" loc="(3700,1690)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="rinse_time"/></comp>
+    <wire from="(3760,1680)" to="(3790,1680)"/>
+    <comp lib="0" loc="(3790,1680)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="t3"/></comp>
+    <comp lib="2" loc="(3760,1820)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(3740,1830)" to="(3740,1870)"/>
+    <comp lib="0" loc="(3740,1870)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="to_spin_ok"/></comp>
+    <wire from="(3730,1810)" to="(3700,1810)"/>
+    <comp lib="0" loc="(3700,1810)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="t3"/></comp>
+    <wire from="(3730,1830)" to="(3700,1830)"/>
+    <comp lib="0" loc="(3700,1830)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="spin_time"/></comp>
+    <wire from="(3760,1820)" to="(3790,1820)"/>
+    <comp lib="0" loc="(3790,1820)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="t4"/></comp>
+    <comp lib="2" loc="(3760,1960)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(3740,1970)" to="(3740,2010)"/>
+    <comp lib="0" loc="(3740,2010)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="rebal_all"/></comp>
+    <wire from="(3730,1950)" to="(3700,1950)"/>
+    <comp lib="0" loc="(3700,1950)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="t4"/></comp>
+    <wire from="(3730,1970)" to="(3700,1970)"/>
+    <comp lib="0" loc="(3700,1970)" name="Constant"><a name="width" val="8"/><a name="value" val="0x4"/></comp>
+    <wire from="(3760,1960)" to="(3790,1960)"/>
+    <comp lib="0" loc="(3790,1960)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="t5"/></comp>
+    <comp lib="2" loc="(3760,2100)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(3740,2110)" to="(3740,2150)"/>
+    <comp lib="0" loc="(3740,2150)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="abort_all"/></comp>
+    <wire from="(3730,2090)" to="(3700,2090)"/>
+    <comp lib="0" loc="(3700,2090)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="t5"/></comp>
+    <wire from="(3730,2110)" to="(3700,2110)"/>
+    <comp lib="0" loc="(3700,2110)" name="Constant"><a name="width" val="8"/><a name="value" val="0x0"/></comp>
+    <wire from="(3760,2100)" to="(3790,2100)"/>
+    <comp lib="0" loc="(3790,2100)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="t6"/></comp>
+    <comp lib="2" loc="(3760,2240)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(3740,2250)" to="(3740,2290)"/>
+    <comp lib="0" loc="(3740,2290)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_inval"/></comp>
+    <wire from="(3730,2230)" to="(3700,2230)"/>
+    <comp lib="0" loc="(3700,2230)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="t6"/></comp>
+    <wire from="(3730,2250)" to="(3700,2250)"/>
+    <comp lib="0" loc="(3700,2250)" name="Constant"><a name="width" val="8"/><a name="value" val="0x0"/></comp>
+    <wire from="(3760,2240)" to="(3790,2240)"/>
+    <comp lib="0" loc="(3790,2240)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="timer_next"/></comp>
+    <comp lib="2" loc="(3760,2380)" name="Multiplexer"><a name="width" val="2"/></comp>
+    <wire from="(3740,2390)" to="(3740,2430)"/>
+    <comp lib="0" loc="(3740,2430)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="ext_ev"/></comp>
+    <wire from="(3730,2370)" to="(3700,2370)"/>
+    <comp lib="0" loc="(3700,2370)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="ext"/></comp>
+    <wire from="(3730,2390)" to="(3700,2390)"/>
+    <comp lib="0" loc="(3700,2390)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="e_inc"/></comp>
+    <wire from="(3760,2380)" to="(3790,2380)"/>
+    <comp lib="0" loc="(3790,2380)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="2"/><a name="label" val="x1"/></comp>
+    <comp lib="2" loc="(3760,2520)" name="Multiplexer"><a name="width" val="2"/></comp>
+    <wire from="(3740,2530)" to="(3740,2570)"/>
+    <comp lib="0" loc="(3740,2570)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="chg"/></comp>
+    <wire from="(3730,2510)" to="(3700,2510)"/>
+    <comp lib="0" loc="(3700,2510)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="x1"/></comp>
+    <wire from="(3730,2530)" to="(3700,2530)"/>
+    <comp lib="0" loc="(3700,2530)" name="Constant"><a name="width" val="2"/><a name="value" val="0x0"/></comp>
+    <wire from="(3760,2520)" to="(3790,2520)"/>
+    <comp lib="0" loc="(3790,2520)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="2"/><a name="label" val="ext_next"/></comp>
+    <comp lib="3" loc="(4240,140)" name="Adder"><a name="width" val="8"/></comp>
+    <wire from="(4200,130)" to="(4170,130)"/>
+    <comp lib="0" loc="(4170,130)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="ticks"/></comp>
+    <wire from="(4200,150)" to="(4170,150)"/>
+    <comp lib="0" loc="(4170,150)" name="Constant"><a name="width" val="8"/><a name="value" val="0x1"/></comp>
+    <wire from="(4240,140)" to="(4270,140)"/>
+    <comp lib="0" loc="(4270,140)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="ticks_inc"/></comp>
+    <wire from="(4220,120)" to="(4220,90)"/>
+    <comp lib="0" loc="(4220,90)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <comp lib="2" loc="(4240,280)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(4220,290)" to="(4220,330)"/>
+    <comp lib="0" loc="(4220,330)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="busy"/></comp>
+    <wire from="(4210,270)" to="(4180,270)"/>
+    <comp lib="0" loc="(4180,270)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="ticks"/></comp>
+    <wire from="(4210,290)" to="(4180,290)"/>
+    <comp lib="0" loc="(4180,290)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="ticks_inc"/></comp>
+    <wire from="(4240,280)" to="(4270,280)"/>
+    <comp lib="0" loc="(4270,280)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="k1"/></comp>
+    <comp lib="2" loc="(4240,420)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(4220,430)" to="(4220,470)"/>
+    <comp lib="0" loc="(4220,470)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="go_wash"/></comp>
+    <wire from="(4210,410)" to="(4180,410)"/>
+    <comp lib="0" loc="(4180,410)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="k1"/></comp>
+    <wire from="(4210,430)" to="(4180,430)"/>
+    <comp lib="0" loc="(4180,430)" name="Constant"><a name="width" val="8"/><a name="value" val="0x0"/></comp>
+    <wire from="(4240,420)" to="(4270,420)"/>
+    <comp lib="0" loc="(4270,420)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="ticks_next"/></comp>
+    <comp lib="2" loc="(4240,560)" name="Multiplexer"><a name="width" val="12"/></comp>
+    <wire from="(4220,570)" to="(4220,610)"/>
+    <comp lib="0" loc="(4220,610)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_rinse"/></comp>
+    <wire from="(4210,550)" to="(4180,550)"/>
+    <comp lib="0" loc="(4180,550)" name="Constant"><a name="width" val="12"/><a name="value" val="0x0"/></comp>
+    <wire from="(4210,570)" to="(4180,570)"/>
+    <comp lib="0" loc="(4180,570)" name="Constant"><a name="width" val="12"/><a name="value" val="0x1"/></comp>
+    <wire from="(4240,560)" to="(4270,560)"/>
+    <comp lib="0" loc="(4270,560)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="12"/><a name="label" val="ei1"/></comp>
+    <comp lib="2" loc="(4240,700)" name="Multiplexer"><a name="width" val="12"/></comp>
+    <wire from="(4220,710)" to="(4220,750)"/>
+    <comp lib="0" loc="(4220,750)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_wash"/></comp>
+    <wire from="(4210,690)" to="(4180,690)"/>
+    <comp lib="0" loc="(4180,690)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="12"/><a name="label" val="ei1"/></comp>
+    <wire from="(4210,710)" to="(4180,710)"/>
+    <comp lib="0" loc="(4180,710)" name="Constant"><a name="width" val="12"/><a name="value" val="0x3"/></comp>
+    <wire from="(4240,700)" to="(4270,700)"/>
+    <comp lib="0" loc="(4270,700)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="12"/><a name="label" val="ei2"/></comp>
+    <comp lib="2" loc="(4240,840)" name="Multiplexer"><a name="width" val="12"/></comp>
+    <wire from="(4220,850)" to="(4220,890)"/>
+    <comp lib="0" loc="(4220,890)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_spin"/></comp>
+    <wire from="(4210,830)" to="(4180,830)"/>
+    <comp lib="0" loc="(4180,830)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="12"/><a name="label" val="ei2"/></comp>
+    <wire from="(4210,850)" to="(4180,850)"/>
+    <comp lib="0" loc="(4180,850)" name="Constant"><a name="width" val="12"/><a name="value" val="0x2"/></comp>
+    <wire from="(4240,840)" to="(4270,840)"/>
+    <comp lib="0" loc="(4270,840)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="12"/><a name="label" val="ei3"/></comp>
+    <comp lib="2" loc="(4240,980)" name="Multiplexer"><a name="width" val="12"/></comp>
+    <wire from="(4220,990)" to="(4220,1030)"/>
+    <comp lib="0" loc="(4220,1030)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_rebal"/></comp>
+    <wire from="(4210,970)" to="(4180,970)"/>
+    <comp lib="0" loc="(4180,970)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="12"/><a name="label" val="ei3"/></comp>
+    <wire from="(4210,990)" to="(4180,990)"/>
+    <comp lib="0" loc="(4180,990)" name="Constant"><a name="width" val="12"/><a name="value" val="0x1"/></comp>
+    <wire from="(4240,980)" to="(4270,980)"/>
+    <comp lib="0" loc="(4270,980)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="12"/><a name="label" val="einc"/></comp>
+    <comp lib="3" loc="(4240,1120)" name="Adder"><a name="width" val="12"/></comp>
+    <wire from="(4200,1110)" to="(4170,1110)"/>
+    <comp lib="0" loc="(4170,1110)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="12"/><a name="label" val="energy"/></comp>
+    <wire from="(4200,1130)" to="(4170,1130)"/>
+    <comp lib="0" loc="(4170,1130)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="12"/><a name="label" val="einc"/></comp>
+    <wire from="(4240,1120)" to="(4270,1120)"/>
+    <comp lib="0" loc="(4270,1120)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="12"/><a name="label" val="e_add"/></comp>
+    <wire from="(4220,1100)" to="(4220,1070)"/>
+    <comp lib="0" loc="(4220,1070)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <comp lib="2" loc="(4240,1260)" name="Multiplexer"><a name="width" val="12"/></comp>
+    <wire from="(4220,1270)" to="(4220,1310)"/>
+    <comp lib="0" loc="(4220,1310)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="busy"/></comp>
+    <wire from="(4210,1250)" to="(4180,1250)"/>
+    <comp lib="0" loc="(4180,1250)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="12"/><a name="label" val="energy"/></comp>
+    <wire from="(4210,1270)" to="(4180,1270)"/>
+    <comp lib="0" loc="(4180,1270)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="12"/><a name="label" val="e_add"/></comp>
+    <wire from="(4240,1260)" to="(4270,1260)"/>
+    <comp lib="0" loc="(4270,1260)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="12"/><a name="label" val="m1"/></comp>
+    <comp lib="2" loc="(4240,1400)" name="Multiplexer"><a name="width" val="12"/></comp>
+    <wire from="(4220,1410)" to="(4220,1450)"/>
+    <comp lib="0" loc="(4220,1450)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="go_wash"/></comp>
+    <wire from="(4210,1390)" to="(4180,1390)"/>
+    <comp lib="0" loc="(4180,1390)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="12"/><a name="label" val="m1"/></comp>
+    <wire from="(4210,1410)" to="(4180,1410)"/>
+    <comp lib="0" loc="(4180,1410)" name="Constant"><a name="width" val="12"/><a name="value" val="0x0"/></comp>
+    <wire from="(4240,1400)" to="(4270,1400)"/>
+    <comp lib="0" loc="(4270,1400)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="12"/><a name="label" val="energy_next"/></comp>
+    <comp lib="2" loc="(4240,1540)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(4220,1550)" to="(4220,1590)"/>
+    <comp lib="0" loc="(4220,1590)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="to_rinse"/></comp>
+    <wire from="(4210,1530)" to="(4180,1530)"/>
+    <comp lib="0" loc="(4180,1530)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="ext_r"/></comp>
+    <wire from="(4210,1550)" to="(4180,1550)"/>
+    <comp lib="0" loc="(4180,1550)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(4240,1540)" to="(4270,1540)"/>
+    <comp lib="0" loc="(4270,1540)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="rinse_fill"/></comp>
+    <comp lib="3" loc="(4240,1680)" name="Adder"><a name="width" val="8"/></comp>
+    <wire from="(4200,1670)" to="(4170,1670)"/>
+    <comp lib="0" loc="(4170,1670)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="water_used"/></comp>
+    <wire from="(4200,1690)" to="(4170,1690)"/>
+    <comp lib="0" loc="(4170,1690)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="water_fill"/></comp>
+    <wire from="(4240,1680)" to="(4270,1680)"/>
+    <comp lib="0" loc="(4270,1680)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="w_add"/></comp>
+    <wire from="(4220,1660)" to="(4220,1630)"/>
+    <comp lib="0" loc="(4220,1630)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <comp lib="2" loc="(4240,1820)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(4220,1830)" to="(4220,1870)"/>
+    <comp lib="0" loc="(4220,1870)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="rinse_fill"/></comp>
+    <wire from="(4210,1810)" to="(4180,1810)"/>
+    <comp lib="0" loc="(4180,1810)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="water_used"/></comp>
+    <wire from="(4210,1830)" to="(4180,1830)"/>
+    <comp lib="0" loc="(4180,1830)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="w_add"/></comp>
+    <wire from="(4240,1820)" to="(4270,1820)"/>
+    <comp lib="0" loc="(4270,1820)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="w1"/></comp>
+    <comp lib="2" loc="(4240,1960)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(4220,1970)" to="(4220,2010)"/>
+    <comp lib="0" loc="(4220,2010)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="go_wash"/></comp>
+    <wire from="(4210,1950)" to="(4180,1950)"/>
+    <comp lib="0" loc="(4180,1950)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="w1"/></comp>
+    <wire from="(4210,1970)" to="(4180,1970)"/>
+    <comp lib="0" loc="(4180,1970)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="water_fill"/></comp>
+    <wire from="(4240,1960)" to="(4270,1960)"/>
+    <comp lib="0" loc="(4270,1960)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="water_next"/></comp>
+    <comp lib="3" loc="(4240,2100)" name="Subtractor"><a name="width" val="8"/></comp>
+    <wire from="(4200,2090)" to="(4170,2090)"/>
+    <comp lib="0" loc="(4170,2090)" name="Constant"><a name="width" val="8"/><a name="value" val="0x31"/></comp>
+    <wire from="(4200,2110)" to="(4170,2110)"/>
+    <comp lib="0" loc="(4170,2110)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="ticks"/></comp>
+    <wire from="(4240,2100)" to="(4270,2100)"/>
+    <comp lib="0" loc="(4270,2100)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="t_sub"/></comp>
+    <wire from="(4220,2080)" to="(4220,2050)"/>
+    <comp lib="0" loc="(4220,2050)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <comp lib="2" loc="(4240,2240)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(4220,2250)" to="(4220,2290)"/>
+    <comp lib="0" loc="(4220,2290)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="t_over"/></comp>
+    <wire from="(4210,2230)" to="(4180,2230)"/>
+    <comp lib="0" loc="(4180,2230)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="t_sub"/></comp>
+    <wire from="(4210,2250)" to="(4180,2250)"/>
+    <comp lib="0" loc="(4180,2250)" name="Constant"><a name="width" val="8"/><a name="value" val="0x0"/></comp>
+    <wire from="(4240,2240)" to="(4270,2240)"/>
+    <comp lib="0" loc="(4270,2240)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="t_sv"/></comp>
+    <comp lib="2" loc="(4240,2380)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(4220,2390)" to="(4220,2430)"/>
+    <comp lib="0" loc="(4220,2430)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_end"/></comp>
+    <wire from="(4210,2370)" to="(4180,2370)"/>
+    <comp lib="0" loc="(4180,2370)" name="Constant"><a name="width" val="8"/><a name="value" val="0x0"/></comp>
+    <wire from="(4210,2390)" to="(4180,2390)"/>
+    <comp lib="0" loc="(4180,2390)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="t_sv"/></comp>
+    <wire from="(4240,2380)" to="(4270,2380)"/>
+    <comp lib="0" loc="(4270,2380)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="ticks_saved"/></comp>
+    <comp lib="3" loc="(4240,2520)" name="Subtractor"><a name="width" val="12"/></comp>
+    <wire from="(4200,2510)" to="(4170,2510)"/>
+    <comp lib="0" loc="(4170,2510)" name="Constant"><a name="width" val="12"/><a name="value" val="0x70"/></comp>
+    <wire from="(4200,2530)" to="(4170,2530)"/>
+    <comp lib="0" loc="(4170,2530)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="12"/><a name="label" val="energy"/></comp>
+    <wire from="(4240,2520)" to="(4270,2520)"/>
+    <comp lib="0" loc="(4270,2520)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="12"/><a name="label" val="e_sub"/></comp>
+    <wire from="(4220,2500)" to="(4220,2470)"/>
+    <comp lib="0" loc="(4220,2470)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <comp lib="2" loc="(4240,2660)" name="Multiplexer"><a name="width" val="12"/></comp>
+    <wire from="(4220,2670)" to="(4220,2710)"/>
+    <comp lib="0" loc="(4220,2710)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="e_over"/></comp>
+    <wire from="(4210,2650)" to="(4180,2650)"/>
+    <comp lib="0" loc="(4180,2650)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="12"/><a name="label" val="e_sub"/></comp>
+    <wire from="(4210,2670)" to="(4180,2670)"/>
+    <comp lib="0" loc="(4180,2670)" name="Constant"><a name="width" val="12"/><a name="value" val="0x0"/></comp>
+    <wire from="(4240,2660)" to="(4270,2660)"/>
+    <comp lib="0" loc="(4270,2660)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="12"/><a name="label" val="e_sv"/></comp>
+    <comp lib="2" loc="(4240,2800)" name="Multiplexer"><a name="width" val="12"/></comp>
+    <wire from="(4220,2810)" to="(4220,2850)"/>
+    <comp lib="0" loc="(4220,2850)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_end"/></comp>
+    <wire from="(4210,2790)" to="(4180,2790)"/>
+    <comp lib="0" loc="(4180,2790)" name="Constant"><a name="width" val="12"/><a name="value" val="0x0"/></comp>
+    <wire from="(4210,2810)" to="(4180,2810)"/>
+    <comp lib="0" loc="(4180,2810)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="12"/><a name="label" val="e_sv"/></comp>
+    <wire from="(4240,2800)" to="(4270,2800)"/>
+    <comp lib="0" loc="(4270,2800)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="12"/><a name="label" val="energy_saved"/></comp>
+    <comp lib="3" loc="(4240,2940)" name="Subtractor"><a name="width" val="8"/></comp>
+    <wire from="(4200,2930)" to="(4170,2930)"/>
+    <comp lib="0" loc="(4170,2930)" name="Constant"><a name="width" val="8"/><a name="value" val="0x10"/></comp>
+    <wire from="(4200,2950)" to="(4170,2950)"/>
+    <comp lib="0" loc="(4170,2950)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="water_used"/></comp>
+    <wire from="(4240,2940)" to="(4270,2940)"/>
+    <comp lib="0" loc="(4270,2940)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="w_sub"/></comp>
+    <wire from="(4220,2920)" to="(4220,2890)"/>
+    <comp lib="0" loc="(4220,2890)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <comp lib="2" loc="(4240,3080)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(4220,3090)" to="(4220,3130)"/>
+    <comp lib="0" loc="(4220,3130)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="w_over"/></comp>
+    <wire from="(4210,3070)" to="(4180,3070)"/>
+    <comp lib="0" loc="(4180,3070)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="w_sub"/></comp>
+    <wire from="(4210,3090)" to="(4180,3090)"/>
+    <comp lib="0" loc="(4180,3090)" name="Constant"><a name="width" val="8"/><a name="value" val="0x0"/></comp>
+    <wire from="(4240,3080)" to="(4270,3080)"/>
+    <comp lib="0" loc="(4270,3080)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="w_sv"/></comp>
+    <comp lib="2" loc="(4240,3220)" name="Multiplexer"><a name="width" val="8"/></comp>
+    <wire from="(4220,3230)" to="(4220,3270)"/>
+    <comp lib="0" loc="(4220,3270)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_end"/></comp>
+    <wire from="(4210,3210)" to="(4180,3210)"/>
+    <comp lib="0" loc="(4180,3210)" name="Constant"><a name="width" val="8"/><a name="value" val="0x0"/></comp>
+    <wire from="(4210,3230)" to="(4180,3230)"/>
+    <comp lib="0" loc="(4180,3230)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="w_sv"/></comp>
+    <wire from="(4240,3220)" to="(4270,3220)"/>
+    <comp lib="0" loc="(4270,3220)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="water_saved"/></comp>
+    <comp lib="2" loc="(4240,3360)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(4220,3370)" to="(4220,3410)"/>
+    <comp lib="0" loc="(4220,3410)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="t_over"/></comp>
+    <wire from="(4210,3350)" to="(4180,3350)"/>
+    <comp lib="0" loc="(4180,3350)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="e_over"/></comp>
+    <wire from="(4210,3370)" to="(4180,3370)"/>
+    <comp lib="0" loc="(4180,3370)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(4240,3360)" to="(4270,3360)"/>
+    <comp lib="0" loc="(4270,3360)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="n5"/></comp>
+    <comp lib="2" loc="(4240,3500)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(4220,3510)" to="(4220,3550)"/>
+    <comp lib="0" loc="(4220,3550)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="n5"/></comp>
+    <wire from="(4210,3490)" to="(4180,3490)"/>
+    <comp lib="0" loc="(4180,3490)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="w_over"/></comp>
+    <wire from="(4210,3510)" to="(4180,3510)"/>
+    <comp lib="0" loc="(4180,3510)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(4240,3500)" to="(4270,3500)"/>
+    <comp lib="0" loc="(4270,3500)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="n6"/></comp>
+    <comp lib="2" loc="(4240,3640)" name="Multiplexer"><a name="width" val="1"/></comp>
+    <wire from="(4220,3650)" to="(4220,3690)"/>
+    <comp lib="0" loc="(4220,3690)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="s_end"/></comp>
+    <wire from="(4210,3630)" to="(4180,3630)"/>
+    <comp lib="0" loc="(4180,3630)" name="Constant"><a name="width" val="1"/><a name="value" val="0x0"/></comp>
+    <wire from="(4210,3650)" to="(4180,3650)"/>
+    <comp lib="0" loc="(4180,3650)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="n6"/></comp>
+    <wire from="(4240,3640)" to="(4270,3640)"/>
+    <comp lib="0" loc="(4270,3640)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="over_base"/></comp>
+    <comp lib="4" loc="(4720,140)" name="Register"><a name="width" val="3"/><a name="label" val="STATE_REG"/><a name="labelloc" val="north"/></comp>
+    <wire from="(4720,170)" to="(4690,170)"/>
+    <comp lib="0" loc="(4690,170)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="state_next"/></comp>
+    <wire from="(4720,190)" to="(4690,190)"/>
+    <comp lib="0" loc="(4690,190)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(4720,210)" to="(4690,210)"/>
+    <comp lib="0" loc="(4690,210)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="clk"/></comp>
+    <wire from="(4780,170)" to="(4810,170)"/>
+    <comp lib="0" loc="(4810,170)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="3"/><a name="label" val="state"/></comp>
+    <wire from="(4750,230)" to="(4750,260)"/>
+    <comp lib="0" loc="(4750,260)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="reset"/></comp>
+    <comp lib="4" loc="(4720,280)" name="Register"><a name="width" val="8"/><a name="label" val="TIMER_REG"/><a name="labelloc" val="north"/></comp>
+    <wire from="(4720,310)" to="(4690,310)"/>
+    <comp lib="0" loc="(4690,310)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="timer_next"/></comp>
+    <wire from="(4720,330)" to="(4690,330)"/>
+    <comp lib="0" loc="(4690,330)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(4720,350)" to="(4690,350)"/>
+    <comp lib="0" loc="(4690,350)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="clk"/></comp>
+    <wire from="(4780,310)" to="(4810,310)"/>
+    <comp lib="0" loc="(4810,310)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="timer"/></comp>
+    <wire from="(4750,370)" to="(4750,400)"/>
+    <comp lib="0" loc="(4750,400)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="reset"/></comp>
+    <comp lib="4" loc="(4720,420)" name="Register"><a name="width" val="2"/><a name="label" val="EXT_REG"/><a name="labelloc" val="north"/></comp>
+    <wire from="(4720,450)" to="(4690,450)"/>
+    <comp lib="0" loc="(4690,450)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="ext_next"/></comp>
+    <wire from="(4720,470)" to="(4690,470)"/>
+    <comp lib="0" loc="(4690,470)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(4720,490)" to="(4690,490)"/>
+    <comp lib="0" loc="(4690,490)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="clk"/></comp>
+    <wire from="(4780,450)" to="(4810,450)"/>
+    <comp lib="0" loc="(4810,450)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="2"/><a name="label" val="ext"/></comp>
+    <wire from="(4750,510)" to="(4750,540)"/>
+    <comp lib="0" loc="(4750,540)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="reset"/></comp>
+    <comp lib="4" loc="(4720,560)" name="Register"><a name="width" val="2"/><a name="label" val="BAL_RETRY_REG"/><a name="labelloc" val="north"/></comp>
+    <wire from="(4720,590)" to="(4690,590)"/>
+    <comp lib="0" loc="(4690,590)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="att_next"/></comp>
+    <wire from="(4720,610)" to="(4690,610)"/>
+    <comp lib="0" loc="(4690,610)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(4720,630)" to="(4690,630)"/>
+    <comp lib="0" loc="(4690,630)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="clk"/></comp>
+    <wire from="(4780,590)" to="(4810,590)"/>
+    <comp lib="0" loc="(4810,590)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="2"/><a name="label" val="att"/></comp>
+    <wire from="(4750,650)" to="(4750,680)"/>
+    <comp lib="0" loc="(4750,680)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="reset"/></comp>
+    <comp lib="4" loc="(4720,700)" name="Register"><a name="width" val="1"/><a name="label" val="FAULT_REG"/><a name="labelloc" val="north"/></comp>
+    <wire from="(4720,730)" to="(4690,730)"/>
+    <comp lib="0" loc="(4690,730)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="fault_next"/></comp>
+    <wire from="(4720,750)" to="(4690,750)"/>
+    <comp lib="0" loc="(4690,750)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(4720,770)" to="(4690,770)"/>
+    <comp lib="0" loc="(4690,770)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="clk"/></comp>
+    <wire from="(4780,730)" to="(4810,730)"/>
+    <comp lib="0" loc="(4810,730)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="1"/><a name="label" val="fault"/></comp>
+    <wire from="(4750,790)" to="(4750,820)"/>
+    <comp lib="0" loc="(4750,820)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="reset"/></comp>
+    <comp lib="4" loc="(4720,840)" name="Register"><a name="width" val="8"/><a name="label" val="TICKS_REG"/><a name="labelloc" val="north"/></comp>
+    <wire from="(4720,870)" to="(4690,870)"/>
+    <comp lib="0" loc="(4690,870)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="ticks_next"/></comp>
+    <wire from="(4720,890)" to="(4690,890)"/>
+    <comp lib="0" loc="(4690,890)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(4720,910)" to="(4690,910)"/>
+    <comp lib="0" loc="(4690,910)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="clk"/></comp>
+    <wire from="(4780,870)" to="(4810,870)"/>
+    <comp lib="0" loc="(4810,870)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="ticks"/></comp>
+    <wire from="(4750,930)" to="(4750,960)"/>
+    <comp lib="0" loc="(4750,960)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="reset"/></comp>
+    <comp lib="4" loc="(4720,980)" name="Register"><a name="width" val="12"/><a name="label" val="ENERGY_REG"/><a name="labelloc" val="north"/></comp>
+    <wire from="(4720,1010)" to="(4690,1010)"/>
+    <comp lib="0" loc="(4690,1010)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="12"/><a name="label" val="energy_next"/></comp>
+    <wire from="(4720,1030)" to="(4690,1030)"/>
+    <comp lib="0" loc="(4690,1030)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(4720,1050)" to="(4690,1050)"/>
+    <comp lib="0" loc="(4690,1050)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="clk"/></comp>
+    <wire from="(4780,1010)" to="(4810,1010)"/>
+    <comp lib="0" loc="(4810,1010)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="12"/><a name="label" val="energy"/></comp>
+    <wire from="(4750,1070)" to="(4750,1100)"/>
+    <comp lib="0" loc="(4750,1100)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="reset"/></comp>
+    <comp lib="4" loc="(4720,1120)" name="Register"><a name="width" val="8"/><a name="label" val="WATER_REG"/><a name="labelloc" val="north"/></comp>
+    <wire from="(4720,1150)" to="(4690,1150)"/>
+    <comp lib="0" loc="(4690,1150)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="water_next"/></comp>
+    <wire from="(4720,1170)" to="(4690,1170)"/>
+    <comp lib="0" loc="(4690,1170)" name="Constant"><a name="width" val="1"/><a name="value" val="0x1"/></comp>
+    <wire from="(4720,1190)" to="(4690,1190)"/>
+    <comp lib="0" loc="(4690,1190)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="clk"/></comp>
+    <wire from="(4780,1150)" to="(4810,1150)"/>
+    <comp lib="0" loc="(4810,1150)" name="Tunnel"><a name="facing" val="west"/><a name="width" val="8"/><a name="label" val="water_used"/></comp>
+    <wire from="(4750,1210)" to="(4750,1240)"/>
+    <comp lib="0" loc="(4750,1240)" name="Tunnel"><a name="facing" val="north"/><a name="width" val="1"/><a name="label" val="reset"/></comp>
+    <comp lib="0" loc="(5200,140)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="IDLE"/><a name="labelloc" val="east"/><a name="width" val="1"/></comp>
+    <wire from="(5170,140)" to="(5200,140)"/>
+    <comp lib="0" loc="(5170,140)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="s_idle"/></comp>
+    <comp lib="0" loc="(5200,280)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="WASH"/><a name="labelloc" val="east"/><a name="width" val="1"/></comp>
+    <wire from="(5170,280)" to="(5200,280)"/>
+    <comp lib="0" loc="(5170,280)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="s_wash"/></comp>
+    <comp lib="0" loc="(5200,420)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="RINSE"/><a name="labelloc" val="east"/><a name="width" val="1"/></comp>
+    <wire from="(5170,420)" to="(5200,420)"/>
+    <comp lib="0" loc="(5170,420)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="s_rinse"/></comp>
+    <comp lib="0" loc="(5200,560)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="SPIN"/><a name="labelloc" val="east"/><a name="width" val="1"/></comp>
+    <wire from="(5170,560)" to="(5200,560)"/>
+    <comp lib="0" loc="(5170,560)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="s_spin"/></comp>
+    <comp lib="0" loc="(5200,700)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="REBAL"/><a name="labelloc" val="east"/><a name="width" val="1"/></comp>
+    <wire from="(5170,700)" to="(5200,700)"/>
+    <comp lib="0" loc="(5170,700)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="s_rebal"/></comp>
+    <comp lib="0" loc="(5200,840)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="END"/><a name="labelloc" val="east"/><a name="width" val="1"/></comp>
+    <wire from="(5170,840)" to="(5200,840)"/>
+    <comp lib="0" loc="(5170,840)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="s_end"/></comp>
+    <comp lib="0" loc="(5200,980)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="FAULT"/><a name="labelloc" val="east"/><a name="width" val="1"/></comp>
+    <wire from="(5170,980)" to="(5200,980)"/>
+    <comp lib="0" loc="(5170,980)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="fault"/></comp>
+    <comp lib="0" loc="(5200,1120)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="OVER_BASELINE"/><a name="labelloc" val="east"/><a name="width" val="1"/></comp>
+    <wire from="(5170,1120)" to="(5200,1120)"/>
+    <comp lib="0" loc="(5170,1120)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="1"/><a name="label" val="over_base"/></comp>
+    <comp lib="0" loc="(5200,1260)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="STATE"/><a name="labelloc" val="east"/><a name="width" val="3"/><a name="radix" val="10unsigned"/></comp>
+    <wire from="(5170,1260)" to="(5200,1260)"/>
+    <comp lib="0" loc="(5170,1260)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="3"/><a name="label" val="state"/></comp>
+    <comp lib="0" loc="(5200,1400)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="TIMER"/><a name="labelloc" val="east"/><a name="width" val="8"/><a name="radix" val="10unsigned"/></comp>
+    <wire from="(5170,1400)" to="(5200,1400)"/>
+    <comp lib="0" loc="(5170,1400)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="timer"/></comp>
+    <comp lib="0" loc="(5200,1540)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="EXT_COUNT"/><a name="labelloc" val="east"/><a name="width" val="2"/><a name="radix" val="10unsigned"/></comp>
+    <wire from="(5170,1540)" to="(5200,1540)"/>
+    <comp lib="0" loc="(5170,1540)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="ext"/></comp>
+    <comp lib="0" loc="(5200,1680)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="BAL_RETRY"/><a name="labelloc" val="east"/><a name="width" val="2"/><a name="radix" val="10unsigned"/></comp>
+    <wire from="(5170,1680)" to="(5200,1680)"/>
+    <comp lib="0" loc="(5170,1680)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="2"/><a name="label" val="att"/></comp>
+    <comp lib="0" loc="(5200,1820)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="WASH_TIME"/><a name="labelloc" val="east"/><a name="width" val="8"/><a name="radix" val="10unsigned"/></comp>
+    <wire from="(5170,1820)" to="(5200,1820)"/>
+    <comp lib="0" loc="(5170,1820)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="wash_time"/></comp>
+    <comp lib="0" loc="(5200,1960)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="RINSE_TIME"/><a name="labelloc" val="east"/><a name="width" val="8"/><a name="radix" val="10unsigned"/></comp>
+    <wire from="(5170,1960)" to="(5200,1960)"/>
+    <comp lib="0" loc="(5170,1960)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="rinse_time"/></comp>
+    <comp lib="0" loc="(5200,2100)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="SPIN_TIME"/><a name="labelloc" val="east"/><a name="width" val="8"/><a name="radix" val="10unsigned"/></comp>
+    <wire from="(5170,2100)" to="(5200,2100)"/>
+    <comp lib="0" loc="(5170,2100)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="spin_time"/></comp>
+    <comp lib="0" loc="(5200,2240)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="TOTAL_TICKS"/><a name="labelloc" val="east"/><a name="width" val="8"/><a name="radix" val="10unsigned"/></comp>
+    <wire from="(5170,2240)" to="(5200,2240)"/>
+    <comp lib="0" loc="(5170,2240)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="ticks"/></comp>
+    <comp lib="0" loc="(5200,2380)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="ENERGY_USED"/><a name="labelloc" val="east"/><a name="width" val="12"/><a name="radix" val="10unsigned"/></comp>
+    <wire from="(5170,2380)" to="(5200,2380)"/>
+    <comp lib="0" loc="(5170,2380)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="12"/><a name="label" val="energy"/></comp>
+    <comp lib="0" loc="(5200,2520)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="WATER_USED"/><a name="labelloc" val="east"/><a name="width" val="8"/><a name="radix" val="10unsigned"/></comp>
+    <wire from="(5170,2520)" to="(5200,2520)"/>
+    <comp lib="0" loc="(5170,2520)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="water_used"/></comp>
+    <comp lib="0" loc="(5200,2660)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="TICKS_SAVED"/><a name="labelloc" val="east"/><a name="width" val="8"/><a name="radix" val="10unsigned"/></comp>
+    <wire from="(5170,2660)" to="(5200,2660)"/>
+    <comp lib="0" loc="(5170,2660)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="ticks_saved"/></comp>
+    <comp lib="0" loc="(5200,2800)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="ENERGY_SAVED"/><a name="labelloc" val="east"/><a name="width" val="12"/><a name="radix" val="10unsigned"/></comp>
+    <wire from="(5170,2800)" to="(5200,2800)"/>
+    <comp lib="0" loc="(5170,2800)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="12"/><a name="label" val="energy_saved"/></comp>
+    <comp lib="0" loc="(5200,2940)" name="Pin"><a name="facing" val="west"/><a name="output" val="true"/><a name="label" val="WATER_SAVED"/><a name="labelloc" val="east"/><a name="width" val="8"/><a name="radix" val="10unsigned"/></comp>
+    <wire from="(5170,2940)" to="(5200,2940)"/>
+    <comp lib="0" loc="(5170,2940)" name="Tunnel"><a name="facing" val="east"/><a name="width" val="8"/><a name="label" val="water_saved"/></comp>
+    <comp lib="8" loc="(5080,3120)" name="Text"><a name="text" val="Energy units/tick: WASH 3, RINSE 1, SPIN 2, REBAL 1. Baseline fixed program = 49 ticks, 112 energy, 16 water. SAVED outputs are valid at END (clamped at 0; OVER_BASELINE flags a run costing more)."/><a name="font" val="SansSerif plain 12"/></comp>
+  </circuit>
+</project>
